@@ -1,0 +1,10 @@
+﻿{
+  "name": "MONSTARZ SURVIVORS",
+  "short_name": "MONSTARZ",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#070a16",
+  "theme_color": "#22e0ff"
+}
