@@ -51,6 +51,14 @@
   .settingLabel{min-width:92px;color:var(--cyan);font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
   .settingRow input[type=range]{flex:1;min-width:150px;accent-color:var(--lime)}
   .saveStatus{font-size:12px;color:var(--dim);line-height:1.35;min-height:18px;text-align:right}
+  .rankPanel{width:min(520px,94vw);border:1px solid #22e0ff44;background:#080b1dcc;padding:10px;border-radius:8px;box-shadow:0 0 18px #22e0ff18}
+  .rankTools{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+  .rankStatus{font-size:11px;color:var(--dim);line-height:1.45;margin-top:6px;min-height:16px}
+  .rankList{margin-top:7px;display:grid;gap:3px;font-size:11px;text-align:left}
+  .rankRow{display:grid;grid-template-columns:26px 1fr 54px 48px;gap:6px;align-items:center;padding:4px 6px;background:#101639cc;border:1px solid #ffffff12;border-radius:6px}
+  .rankRow b{color:var(--lime);font-family:var(--display);font-size:12px}
+  .rankRow span:nth-child(2){overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#e6e0ff}
+  .rankResult{color:var(--cyan);font-size:12px;line-height:1.45;max-width:480px;min-height:18px}
   button.btn{font-family:var(--display);text-transform:uppercase;letter-spacing:2px;font-size:18px;padding:12px 30px;border:none;cursor:pointer;border-radius:12px;color:#08110a;margin-top:6px;
     background:linear-gradient(180deg,#d9ff7a,var(--lime) 55%,var(--lime2));box-shadow:0 0 18px rgba(182,255,46,.45),0 6px 0 #4f8f12;transition:transform .08s}
   button.btn:active{transform:translateY(3px);box-shadow:0 0 18px rgba(182,255,46,.45),0 3px 0 #4f8f12}
@@ -147,6 +155,14 @@
     <button class="btn" id="loadProfileBtn">불러오기</button>
   </div>
   <div id="profileStatus" class="loadstat"></div>
+  <div id="rankPanel" class="rankPanel">
+    <div class="rankTools">
+      <button class="btn2" id="soopLoginBtn">SOOP 로그인</button>
+      <button class="btn2" id="rankRefreshBtn">랭킹 새로고침</button>
+    </div>
+    <div id="rankStatus" class="rankStatus">랭킹은 Firebase/SOOP 설정 후 활성화됩니다.</div>
+    <div id="rankList" class="rankList"></div>
+  </div>
   <div id="charSelectPane" class="hidden">
     <div class="profileTools">
       <button class="btn2" id="backProfileBtn">메인 메뉴</button>
@@ -166,6 +182,8 @@
   <div class="stat"><div>STAGE<b id="goStage">1</b></div><div>SURVIVED<b id="goTime">00:00</b></div><div>KILLS<b id="goKills">0</b></div><div>LEVEL<b id="goLevel">1</b></div></div>
   <div class="hint" id="goChar"></div>
   <div id="unlockNote"></div>
+  <div id="rankResult" class="rankResult"></div>
+  <button class="btn2" id="rankSubmitBtn">랭킹 등록</button>
   <button class="btn" id="retryBtn">선수 선택으로</button>
 </div>
 
@@ -212,7 +230,7 @@ const dist2=(ax,ay,bx,by)=>{const dx=ax-bx,dy=ay-by;return dx*dx+dy*dy;};
 const clamp=(v,a,b)=>v<a?a:v>b?b:v;
 function fmtTime(s){s=Math.floor(s);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
 
-const WMAX=3, PMAX=3, WLV_MAX=40, PLV_MAX=10;
+const WMAX=3, PMAX=4, WLV_MAX=40, PLV_MAX=10;
 
 const RACES={
   terran :{name:'테란',  col:'#3aa0ff', regen:2.8, kill:0,    shield:0,  armor:2, note:'업그레이드 친화 · 기본 장갑 · 체력 재생'},
@@ -232,7 +250,7 @@ const WEAPONS={
   // terran
   marine  :{name:'사격',         icon:'🔫',owner:'500',    kind:'shot',  base:{cd:0.70,dmg:7,speed:540,count:1,pierce:0}},
   ghost   :{name:'저격 · 락다운',icon:'🎯',owner:'CHAMCHI',kind:'snipe', base:{cd:1.60,dmg:42,pierce:1}},
-  medic   :{name:'치유의 빛',    icon:'➕',owner:'SUN',    kind:'heal',  base:{cd:1.40,heal:14,radius:120,dmg:4}},
+  medic   :{name:'치유의 빛',    icon:'➕',owner:'SUN',    kind:'heal',  base:{cd:1.40,heal:14,radius:120,dmg:4,gunDmg:7,speed:540,count:1,pierce:0}},
   siege   :{name:'시즈 포격',    icon:'💥',owner:'JDD',    kind:'arty',  base:{cd:1.70,dmg:17,radius:74,delay:0.45}},
   vulture :{name:'스파이더 마인',icon:'🕷️',owner:'SAMPLE', kind:'mine',  base:{cd:1.30,dmg:26,radius:64,trig:44,arm:0.4}},
   firebat :{name:'화염 방사',    icon:'🔥',owner:'AMPLE',  kind:'flame', base:{cd:0.22,dmg:4,radius:118,arc:0.95}},
@@ -268,7 +286,7 @@ function volleyAngles(base,count,step=0.36){
 }
 function weaponUpgradeStats(id,w){
   const kind=WEAPONS[id].kind,stats=['dmg','haste'];
-  if(['shot','spread','chain','scarab','snipe','siege','arty','minion','mine','carrier'].includes(kind))stats.push('count');
+  if(['shot','spread','chain','scarab','snipe','siege','arty','minion','mine','carrier','heal'].includes(kind))stats.push('count');
   if(['arc','cleave','nova','siege','arty','field','mine','flame','spikes','scarab','heal','carrier'].includes(kind))stats.push('area');
   if(['shot','spread','chain','scarab','snipe','field','minion','heal','arc','flame','spikes'].includes(kind))stats.push('special');
   return stats;
@@ -321,6 +339,16 @@ const BASE_UNLOCKS=['PEANUT','500','NANGNI'];
 const META_DEFAULT={kills:0,time:0,level:0,bosses:0,stage:1,clears:0,endlessBest:0};
 const SAVE_KEY='monstarz_survivors_unlocks_v1';
 const SETTINGS_KEY='monstarz_survivors_settings_v1';
+const SOOP_AUTH_KEY='monstarz_soop_auth_v1';
+const RANK_PENDING_KEY='monstarz_pending_rank_v1';
+const SOOP_STATE_KEY='monstarz_soop_oauth_state_v1';
+const RANKING_CONFIG={
+  firebase:{"apiKey":"AIzaSyDG_A78a87l_vc3BdbAk-mX5DmoHOzMWNA","authDomain":"jddcontens.firebaseapp.com","projectId":"jddcontens","appId":"1:173723966783:web:ccd54e5417327b2600478a","databaseURL":"https://jddcontens-default-rtdb.asia-southeast1.firebasedatabase.app"},
+  functionsRegion:'asia-northeast3',
+  collection:'monstarz_rankings',
+  submitFunction:'submitRanking',
+  soop:{"clientId":"339180d798482f82dba3cd99121dccfe","clientSecret":"","redirectUri":"https://monstarznew.vercel.app/","authUrl":"https://openapi.sooplive.com/auth/code","tokenApi":"/api/soop-token","refreshApi":"/api/soop-refresh","apiBase":"https://monstarznew.vercel.app","sdkUrl":"https://static.sooplive.com/asset/app/chat-sdk/sooplive-chat-sdk.js","stationInfoUrl":"https://openapi.sooplive.com/user/stationinfo"}
+};
 const UNLOCKED=new Set(BASE_UNLOCKS);
 const META={...META_DEFAULT};
 function xpRequirement(level){
@@ -424,10 +452,11 @@ function spawnTemples(){
 }
 function spawnBoss(){
   const a=rand(0,TAU),R=520;
-  const hp=Math.round(1800*Math.pow(G.stage,1.65)*(1+G.time/520));
+  const bossMul=G.stage>=2?2:1;
+  const hp=Math.round(1800*Math.pow(G.stage,1.65)*(1+G.time/520)*bossMul);
   const pos={x:G.player.x+Math.cos(a)*R,y:G.player.y+Math.sin(a)*R};clampToMap(pos,90);
   G.boss={x:pos.x,y:pos.y,r:50+G.stage*4,hp,maxhp:hp,
-    spd:58+G.stage*9,dmg:24+G.stage*8,type:'boss',hit:0,shootT:1.8,ph:Math.random()*TAU,kb:{x:0,y:0}};
+    spd:(58+G.stage*9)*(G.stage>=2?1.12:1),dmg:(24+G.stage*8)*bossMul,type:'boss',hit:0,shootT:1.45,pattern:0,ph:Math.random()*TAU,kb:{x:0,y:0}};
   G.phase='boss';showBanner('BOSS 출현');
 }
 function attractAllDrops(){
@@ -457,9 +486,56 @@ function startEndless(){
 }
 function raiseFrenzy(){
   G.frenzy=true;G.frenzyLv++;G.nextFrenzy+=G.endless?30:45;
-  showBanner('광폭화 '+G.frenzyLv+'단계');
+  showBanner('광폭화 '+G.frenzyLv+'단계'+(G.frenzyLv%3===0?' · 위험도 급상승':''));
 }
 function showBanner(t){G.banner={txt:t,t:2.2};$('banner').textContent=t;$('banner').style.opacity='1';}
+function frenzyRamp(){
+  const f=G.frenzyLv||0,t=Math.floor(f/3);
+  if(f<=0)return {tier:0,cap:0,hp:0,speed:0,dmg:0,pressure:0,incoming:1};
+  const over=Math.max(0,f-1);
+  return {
+    tier:t,
+    cap:180+over*40+t*85,
+    hp:4.0+over*0.55+t*(1.10+t*0.14),
+    speed:0.35+over*0.055+t*(0.10+t*0.015),
+    dmg:1.90+over*0.32+t*(0.45+t*0.07),
+    pressure:4.60+over*0.65+t*(1.20+t*0.18),
+    incoming:3.0+over*0.25+t*(0.55+t*0.08)
+  };
+}
+function frenzyRushMode(){return G&&(G.frenzyLv||0)>=3;}
+function bossShot(b,a,speed,dmg,r,life,kind){
+  G.bossShots.push({x:b.x,y:b.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:r||7+G.stage*0.5,dmg,life:life||3,kind:kind||'orb'});
+}
+function fireBossPattern(b,dx,dy,fr){
+  const f=G.frenzyLv||0,stage=G.stage,base=Math.atan2(dy,dx),tier=fr.tier||0;
+  const speed=240+stage*25+f*18+tier*35,dmg=b.dmg*(0.65+f*0.04+fr.dmg*0.35);
+  const patterns=stage>=3?3:(stage>=2?2:1),pat=(b.pattern||0)%patterns;b.pattern=(b.pattern||0)+1;
+  if(pat===0){
+    const n=10+stage*4+f*2+tier*5;
+    for(let i=0;i<n;i++)bossShot(b,base+i*TAU/n,speed,dmg,7+stage*0.5,3,'ring');
+    return Math.max(0.82,2.0-stage*0.20-f*0.08-tier*0.10);
+  }
+  if(pat===1){
+    const waves=stage>=3?3:2,wide=stage>=3?0.18:0.22,fan=5+stage*2+tier*2;
+    for(let w=0;w<waves;w++){
+      const lead=base+(w-(waves-1)/2)*0.34;
+      for(let i=0;i<fan;i++){
+        const a=lead+(i-(fan-1)/2)*wide;
+        bossShot(b,a,speed+70+w*45,dmg*(0.78+0.08*w),6.4+stage*0.45,2.7,'fan');
+      }
+    }
+    return Math.max(0.72,1.65-stage*0.18-f*0.06-tier*0.08);
+  }
+  const n=18+stage*5+f*2+tier*6,spin=b.ph+G.time*1.2;
+  for(let i=0;i<n;i++){
+    const a=spin+i*TAU/n;
+    bossShot(b,a,speed+((i%2)?95:25),dmg*0.72,5.8+stage*0.35,3.2,'spiral');
+  }
+  for(const off of [-0.36,-0.12,0.12,0.36])bossShot(b,base+off,speed+190,dmg*1.05,8.5+stage*0.4,2.1,'lance');
+  b.ph+=0.75;
+  return Math.max(0.62,1.45-stage*0.14-f*0.055-tier*0.08);
+}
 
 /* ---------- enemies ---------- */
 const ETYPES={
@@ -471,7 +547,7 @@ const ETYPES={
 };
 const EKMAP={ling:'walker',fast:'runner',tank:'brute',swarm:'swarmling',spit:'spitter'};
 function spawnEnemy(){
-  const f=G.frenzyLv||0;if(G.enemies.length>=280+f*22+(G.endless?90:0))return;
+  const f=G.frenzyLv||0,fr=frenzyRamp();if(G.enemies.length>=280+f*22+fr.cap+(G.endless?90:0))return;
   const t=G.stageTime;let pool=['ling'];
   if(t>30)pool=['ling','ling','ling','fast'];
   if(t>60)pool=['ling','ling','fast','swarm'];
@@ -479,11 +555,13 @@ function spawnEnemy(){
   if(t>120)pool=['ling','fast','swarm','spit','tank'];
   if(G.frenzy)pool=['fast','swarm','swarm','spit','tank','ling'];
   if(f>=3)pool.push('tank','fast','spit');
+  if(fr.tier>=2)pool.push('tank','tank','spit','fast');
+  if(fr.tier>=3)pool.push('tank','swarm','swarm','spit');
   if(G.endless)pool=['fast','swarm','swarm','spit','tank','tank','ling'];
   const _en=pool[Math.floor(Math.random()*pool.length)];const d=ETYPES[_en];
   const a=Math.random()*TAU,rad=Math.max(W,H)*0.62+rand(20,120);
-  const hpS=1+G.time/150+(G.stage-1)*0.7+f*0.45+(G.endless?1+G.endlessKills/250:0);
-  const spdS=1+f*0.055+(G.endless?0.12:0),dmgS=1+f*0.08+(G.endless?0.22:0);
+  const hpS=1+G.time/150+(G.stage-1)*0.7+f*0.45+fr.hp+(G.endless?1+G.endlessKills/250:0);
+  const spdS=1+f*0.055+fr.speed+(G.endless?0.12:0),dmgS=1+f*0.08+fr.dmg+(G.endless?0.22:0);
   const pos={x:G.player.x+Math.cos(a)*rad,y:G.player.y+Math.sin(a)*rad};clampToMap(pos,d.r+8);
   G.enemies.push({x:pos.x,y:pos.y,r:d.r,
     hp:d.hp*hpS,maxhp:d.hp*hpS,spd:d.spd*spdS,dmg:d.dmg*dmgS,xp:d.xp,col:d.col,hit:0,slow:0,type:'enemy',ekind:EKMAP[_en],ph:Math.random()*TAU,kb:{x:0,y:0}});
@@ -505,7 +583,7 @@ function hurt(t,dmg,fx,fy,knock){
   if(t.dead)return;
   let d=dmg,crit=false;if(G.crit>0&&Math.random()<G.crit){d*=2;crit=true;}
   t.hp-=d;t.hit=0.08;
-  if(knock&&t.type==='enemy'){const dx=t.x-fx,dy=t.y-fy,m=Math.hypot(dx,dy)||1;t.kb.x+=dx/m*knock;t.kb.y+=dy/m*knock;}
+  if(knock&&t.type==='enemy'&&!frenzyRushMode()){const dx=t.x-fx,dy=t.y-fy,m=Math.hypot(dx,dy)||1;t.kb.x+=dx/m*knock;t.kb.y+=dy/m*knock;}
   G.dmgs.push({x:t.x,y:t.y-t.r,txt:Math.round(d),t:0,vy:-34,col:crit?'#ffd23c':'#fff',big:crit});
   if(t.hp<=0)onDeath(t);
 }
@@ -532,6 +610,7 @@ function onDeath(t){
   for(let i=0;i<8;i++){const a=Math.random()*TAU,s=rand(40,160);G.parts.push({x:t.x,y:t.y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:rand(.25,.5),col:t.col,r:rand(2,4)});}
 }
 function takeDamage(d){const p=G.player;
+  d*=frenzyRamp().incoming;
   if(p.shield>0){const a=Math.min(p.shield,d);p.shield-=a;d-=a;}
   if(d>0)p.hp-=d;
   p.noHit=0;p.hitcd=0.55;p.flash=0.25;G.shake=Math.max(G.shake,5);
@@ -560,7 +639,10 @@ function fire(id,w){
     if(tgt){let a0=Math.atan2(tgt.y-p.y,tgt.x-p.x);for(let i=0;i<count;i++){const a=a0+(i-(count-1)/2)*0.12;G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*950,vy:Math.sin(a)*950,r:6,dmg,pierce,hits:[],life:1.2,kind:'snipe'});
       G.beams.push({x1:p.x,y1:p.y,x2:tgt.x+Math.cos(a)*60,y2:tgt.y+Math.sin(a)*60,t:0});}}
   } else if(k==='heal'){
-    const heal=B.heal*(1+0.12*special),radius=B.radius*area,dmg=weaponDamage(w,B.dmg,0.10);
+    const heal=B.heal*0.20*(1+0.12*special),radius=B.radius*area,dmg=weaponDamage(w,B.dmg,0.10);
+    const count=(B.count||1)+Math.floor(countLv/3),pierce=(B.pierce||0)+Math.floor(special/3),gunDmg=weaponDamage(w,B.gunDmg||7,0.12),speed=(B.speed||540)*(1+special*0.035);
+    const tgt=nearestTarget(p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
+    for(const a of volleyAngles(a0,count,0.18))G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:5.5,dmg:gunDmg,pierce,hits:[],life:1.35,kind:'medic'});
     p.hp=Math.min(p.maxhp,p.hp+heal);G.dmgs.push({x:p.x,y:p.y-p.r,txt:'+'+Math.round(heal),t:0,vy:-34,col:'#7ddc1f'});
     for(const t of G._targets){if(!t.dead&&t.type==='enemy'&&dist2(p.x,p.y,t.x,t.y)<(radius+t.r)**2)hurt(t,dmg,p.x,p.y,0);}
     G.pulses.push({t:0,dur:0.3,r:radius,col:'#7ddc1f'});
@@ -619,7 +701,8 @@ function update(dt){
   if(G.phase!=='portal'&&G.stageTime>=G.nextFrenzy)raiseFrenzy();
   // spawning
   if(G.phase!=='portal'){
-    G.spawnAcc+=dt;const baseI=Math.max(0.14,0.9-G.stageTime*0.0025),preGrowth=G.frenzyLv?1:2,pressure=preGrowth+(G.frenzyLv||0)*0.42+(G.endless?0.9:0),interval=baseI/pressure;
+    const fr=frenzyRamp();
+    G.spawnAcc+=dt;const baseI=Math.max(0.12,0.9-G.stageTime*0.0025),preGrowth=G.frenzyLv?1:2,pressure=preGrowth+(G.frenzyLv||0)*0.42+fr.pressure+(G.endless?0.9:0),interval=baseI/pressure;
     while(G.spawnAcc>=interval){G.spawnAcc-=interval;spawnEnemy();}
   }
 
@@ -688,16 +771,17 @@ function update(dt){
 
   // boss
   if(G.boss&&!G.boss.dead){const b=G.boss;const dx=p.x-b.x,dy=p.y-b.y,m=Math.hypot(dx,dy)||1;
-    const bossSpd=b.spd*(1+(G.frenzyLv||0)*0.04);b.x+=dx/m*bossSpd*dt+b.kb.x*dt;b.y+=dy/m*bossSpd*dt+b.kb.y*dt;b.kb.x*=0.9;b.kb.y*=0.9;
+    const fr=frenzyRamp(),bossSpd=b.spd*(1+(G.frenzyLv||0)*0.04+fr.speed*0.7);b.x+=dx/m*bossSpd*dt+b.kb.x*dt;b.y+=dy/m*bossSpd*dt+b.kb.y*dt;b.kb.x*=0.9;b.kb.y*=0.9;
     clampToMap(b,b.r+12);
     if(b.hit>0)b.hit-=dt;
     if(dist2(p.x,p.y,b.x,b.y)<(p.r+b.r)**2&&p.hitcd<=0){takeDamage(Math.max(1,b.dmg-G.armor));if(G.over)return;}
-    b.shootT-=dt;if(b.shootT<=0){const f=G.frenzyLv||0;b.shootT=Math.max(0.95,2.1-G.stage*0.22-f*0.08);const n=10+G.stage*4+f*2,base=Math.atan2(dy,dx),speed=240+G.stage*25+f*18;for(let i=0;i<n;i++){const a=base+i*TAU/n;G.bossShots.push({x:b.x,y:b.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:7+G.stage*0.5,dmg:b.dmg*(0.65+f*0.04),life:3});}}}
+    b.shootT-=dt;if(b.shootT<=0)b.shootT=fireBossPattern(b,dx,dy,fr);}
   for(const bs of G.bossShots){bs.x+=bs.vx*dt;bs.y+=bs.vy*dt;bs.life-=dt;if(dist2(p.x,p.y,bs.x,bs.y)<(p.r+bs.r)**2&&p.hitcd<=0){takeDamage(Math.max(1,Math.round(bs.dmg)-G.armor));bs.life=0;if(G.over)return;}}
   G.bossShots=G.bossShots.filter(b=>b.life>0);
 
   // enemies move + contact + separation
-  for(const e of G.enemies){if(e.dead)continue;const dx=p.x-e.x,dy=p.y-e.y,m=Math.hypot(dx,dy)||1;const sp=e.spd*(e.slow>0?0.5:1);
+  for(const e of G.enemies){if(e.dead)continue;const dx=p.x-e.x,dy=p.y-e.y,m=Math.hypot(dx,dy)||1,rush=frenzyRushMode(),rushMul=rush?(1.65+Math.min(1.25,Math.max(0,(G.frenzyLv||0)-3)*0.08)):1,sp=e.spd*(rush?1:(e.slow>0?0.5:1))*rushMul;
+    if(rush){e.kb.x=0;e.kb.y=0;}
     e.x+=dx/m*sp*dt+e.kb.x*dt;e.y+=dy/m*sp*dt+e.kb.y*dt;e.kb.x*=0.86;e.kb.y*=0.86;
     clampToMap(e,e.r+8);
     if(e.hit>0)e.hit-=dt;if(e.slow>0)e.slow-=dt;
@@ -1012,6 +1096,229 @@ function toggleBgm(){
   saveAudioSettings();syncBgmUi();
 }
 function stopBgm(){if(BGM)BGM.pause();syncBgmUi();}
+const SCRIPT_PROMISES={};
+let SOOP_AUTH={sdk:null,accessToken:'',refreshToken:'',nick:'',stationName:''};
+let FB_RANK={app:null,db:null,functions:null,promise:null};
+function rankConfigReady(){
+  const f=RANKING_CONFIG.firebase,s=RANKING_CONFIG.soop;
+  return !!(f.apiKey&&f.authDomain&&f.projectId&&f.appId&&s.clientId&&(s.tokenApi||s.clientSecret));
+}
+function soopRedirectUri(){const s=RANKING_CONFIG.soop;return s.redirectUri||location.origin+location.pathname;}
+function soopApiUrl(path){
+  if(!path)return '';
+  if(/^https?:\/\//i.test(path))return path;
+  const s=RANKING_CONFIG.soop,base=s.apiBase||location.origin;
+  try{return new URL(path,base).href;}catch(e){return path;}
+}
+function buildSoopAuthUrl(){
+  const s=RANKING_CONFIG.soop,state='rank_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+  try{sessionStorage.setItem(SOOP_STATE_KEY,state);}catch(e){}
+  const params=new URLSearchParams();
+  params.set('client_id',s.clientId);
+  params.set('redirect_uri',soopRedirectUri());
+  params.set('response_type','code');
+  params.set('state',state);
+  return (s.authUrl||'https://openapi.sooplive.com/auth/code')+'?'+params.toString();
+}
+function rankNum(n){return Number(n||0).toLocaleString('ko-KR');}
+function setRankStatus(msg){const el=$('rankStatus');if(el)el.textContent=msg;}
+function setRankResult(msg){const el=$('rankResult');if(el)el.textContent=msg||'';}
+function syncRankControls(){
+  const ready=rankConfigReady(),login=$('soopLoginBtn'),refresh=$('rankRefreshBtn'),submit=$('rankSubmitBtn');
+  if(login){login.disabled=!ready;login.textContent=SOOP_AUTH.nick?('SOOP: '+SOOP_AUTH.nick):'SOOP 로그인';}
+  if(refresh)refresh.disabled=!ready;
+  if(submit)submit.disabled=!readPendingRank();
+  if(!ready)setRankStatus('Firebase/SOOP 설정 필요: RANKING_CONFIG 값을 채운 뒤 Cloud Function을 배포하세요.');
+}
+function loadScriptOnce(src){
+  if(SCRIPT_PROMISES[src])return SCRIPT_PROMISES[src];
+  SCRIPT_PROMISES[src]=new Promise((resolve,reject)=>{
+    const old=[...document.scripts].find(s=>s.src===src);
+    if(old){old.addEventListener('load',resolve,{once:true});old.addEventListener('error',reject,{once:true});if(old.dataset.ready)resolve();return;}
+    const s=document.createElement('script');s.src=src;s.async=true;
+    s.onload=()=>{s.dataset.ready='1';resolve();};s.onerror=()=>reject(new Error('script load failed: '+src));
+    document.head.appendChild(s);
+  });
+  return SCRIPT_PROMISES[src];
+}
+function readStoredSoopAuth(){
+  try{
+    const raw=localStorage.getItem(SOOP_AUTH_KEY);if(!raw)return;
+    const data=JSON.parse(raw);if(data&&data.accessToken)SOOP_AUTH={...SOOP_AUTH,...data};
+  }catch(e){}
+}
+function saveStoredSoopAuth(){
+  try{localStorage.setItem(SOOP_AUTH_KEY,JSON.stringify({
+    accessToken:SOOP_AUTH.accessToken,refreshToken:SOOP_AUTH.refreshToken,
+    nick:SOOP_AUTH.nick,stationName:SOOP_AUTH.stationName,savedAt:new Date().toISOString()
+  }));}catch(e){}
+}
+function normalizeSoopAuth(raw){
+  const d=(raw&&raw.data)||raw||{};
+  return {
+    accessToken:d.access_token||d.accessToken||d.token||d.access||'',
+    refreshToken:d.refresh_token||d.refreshToken||'',
+    nick:d.user_nick||d.userNick||d.nick||'',
+    stationName:d.station_name||d.stationName||''
+  };
+}
+async function initSoopSdk(){
+  if(!rankConfigReady())return false;
+  if(SOOP_AUTH.sdk)return true;
+  await loadScriptOnce(RANKING_CONFIG.soop.sdkUrl);
+  const Ctor=(window.SOOP&&window.SOOP.ChatSDK)||window.ChatSDK;
+  if(!Ctor)throw new Error('SOOP ChatSDK constructor not found');
+  SOOP_AUTH.sdk=RANKING_CONFIG.soop.clientSecret?new Ctor(RANKING_CONFIG.soop.clientId,RANKING_CONFIG.soop.clientSecret):new Ctor(RANKING_CONFIG.soop.clientId);
+  if(SOOP_AUTH.sdk.init)await SOOP_AUTH.sdk.init();
+  return true;
+}
+async function exchangeSoopCode(code){
+  const s=RANKING_CONFIG.soop;
+  if(s.tokenApi){
+    const r=await fetch(soopApiUrl(s.tokenApi),{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({code,authCode:code,redirect_uri:soopRedirectUri(),client_id:s.clientId})
+    });
+    const data=await r.json().catch(()=>({}));
+    if(!r.ok||data.error)throw new Error(data.message||data.error_description||data.error||('SOOP token HTTP '+r.status));
+    return normalizeSoopAuth(data);
+  }
+  await initSoopSdk();
+  return normalizeSoopAuth(await SOOP_AUTH.sdk.getAuth(code));
+}
+async function refreshSoopAuth(){
+  const s=RANKING_CONFIG.soop;
+  if(!s.refreshApi||!SOOP_AUTH.refreshToken)return false;
+  const r=await fetch(soopApiUrl(s.refreshApi),{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({refresh_token:SOOP_AUTH.refreshToken,refreshToken:SOOP_AUTH.refreshToken,redirect_uri:soopRedirectUri(),client_id:s.clientId})
+  });
+  const data=await r.json().catch(()=>({}));
+  if(!r.ok||data.error)return false;
+  const auth=normalizeSoopAuth(data);
+  SOOP_AUTH={...SOOP_AUTH,...auth};saveStoredSoopAuth();syncRankControls();
+  return !!SOOP_AUTH.accessToken;
+}
+async function fetchSoopProfile(){
+  if(!SOOP_AUTH.accessToken)return null;
+  try{
+    const body=new URLSearchParams({access_token:SOOP_AUTH.accessToken});
+    const r=await fetch(RANKING_CONFIG.soop.stationInfoUrl,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});
+    const json=await r.json(),data=(json&&json.data)||json||{};
+    if(data.user_nick||data.userNick||data.nick){
+      SOOP_AUTH.nick=String(data.user_nick||data.userNick||data.nick);
+      SOOP_AUTH.stationName=String(data.station_name||data.stationName||SOOP_AUTH.nick);
+      saveStoredSoopAuth();syncRankControls();
+    }
+    return data;
+  }catch(e){return null;}
+}
+async function handleSoopRedirect(){
+  if(!rankConfigReady())return;
+  const url=new URL(location.href),code=url.searchParams.get('authCode')||url.searchParams.get('code');
+  if(!code)return;
+  try{
+    const state=url.searchParams.get('state')||'',saved=sessionStorage.getItem(SOOP_STATE_KEY)||'';
+    if(saved&&state&&saved!==state)throw new Error('SOOP OAuth state mismatch');
+    const auth=await exchangeSoopCode(code);
+    if(auth.accessToken){SOOP_AUTH={...SOOP_AUTH,...auth};saveStoredSoopAuth();await fetchSoopProfile();setRankStatus('SOOP 로그인 완료. 랭킹 등록은 SOOP 닉네임으로 저장됩니다.');}
+  }catch(e){setRankStatus('SOOP 로그인 처리 실패: '+e.message);}
+  finally{
+    try{sessionStorage.removeItem(SOOP_STATE_KEY);}catch(e){}
+    url.searchParams.delete('authCode');url.searchParams.delete('code');url.searchParams.delete('state');
+    history.replaceState(null,'',url.pathname+(url.search?url.search:'')+url.hash);
+  }
+}
+async function soopLogin(){
+  if(!rankConfigReady()){syncRankControls();return;}
+  try{
+    setRankStatus('SOOP 로그인 페이지로 이동합니다...');
+    if(RANKING_CONFIG.soop.tokenApi){location.href=buildSoopAuthUrl();return;}
+    await initSoopSdk();SOOP_AUTH.sdk.openAuth();
+  }
+  catch(e){setRankStatus('SOOP SDK 준비 실패: '+e.message);}
+}
+async function initFirebaseRanking(){
+  if(!rankConfigReady()){syncRankControls();return null;}
+  if(FB_RANK.promise)return FB_RANK.promise;
+  FB_RANK.promise=(async()=>{
+    await loadScriptOnce('https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js');
+    await loadScriptOnce('https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js');
+    await loadScriptOnce('https://www.gstatic.com/firebasejs/10.12.5/firebase-functions-compat.js');
+    FB_RANK.app=firebase.apps.length?firebase.app():firebase.initializeApp(RANKING_CONFIG.firebase);
+    FB_RANK.db=firebase.firestore();
+    FB_RANK.functions=RANKING_CONFIG.functionsRegion?firebase.app().functions(RANKING_CONFIG.functionsRegion):firebase.functions();
+    return FB_RANK;
+  })();
+  return FB_RANK.promise;
+}
+function renderRankList(rows){
+  const list=$('rankList');if(!list)return;
+  list.innerHTML='';
+  if(!rows||!rows.length){const empty=document.createElement('div');empty.className='rankStatus';empty.textContent=rankConfigReady()?'아직 등록된 랭킹이 없습니다.':'설정 후 랭킹을 불러올 수 있습니다.';list.appendChild(empty);return;}
+  rows.forEach((r,i)=>{
+    const row=document.createElement('div');row.className='rankRow';
+    const rank=document.createElement('b');rank.textContent='#'+(i+1);
+    const nick=document.createElement('span');nick.textContent=r.nick||'SOOP';
+    const score=document.createElement('span');score.textContent=rankNum(r.score);
+    const meta=document.createElement('span');meta.textContent=(r.charId||'RUN')+' Lv.'+(r.level||'?');
+    row.append(rank,nick,score,meta);list.appendChild(row);
+  });
+}
+async function loadRankings(){
+  if(!rankConfigReady()){syncRankControls();renderRankList([]);return;}
+  try{
+    await initFirebaseRanking();
+    const snap=await FB_RANK.db.collection(RANKING_CONFIG.collection).orderBy('score','desc').limit(10).get();
+    renderRankList(snap.docs.map(d=>({id:d.id,...d.data()})));
+    setRankStatus((SOOP_AUTH.nick?'SOOP: '+SOOP_AUTH.nick:'SOOP 로그인 필요')+' · ENDLESS 처치 수 기준 TOP 10');
+  }catch(e){setRankStatus('랭킹 불러오기 실패: '+e.message);}
+  syncRankControls();
+}
+function currentRankPayload(){
+  if(!G||!G.clearCredited)return null;
+  const score=Math.max(0,Math.floor(G.endlessKills||0));
+  if(score<=0)return null;
+  return {version:1,score,endlessKills:score,kills:G.kills,stage:G.stage,level:G.level,time:Math.floor(G.time),
+    charId:G.char.id,charKo:G.char.ko,race:G.race,createdAt:new Date().toISOString()};
+}
+function readPendingRank(){
+  try{const raw=localStorage.getItem(RANK_PENDING_KEY);return raw?JSON.parse(raw):null;}catch(e){return null;}
+}
+function storePendingRank(payload){
+  try{localStorage.setItem(RANK_PENDING_KEY,JSON.stringify(payload));}catch(e){}
+  syncRankControls();
+}
+function queueRankFromCurrentRun(){
+  const payload=currentRankPayload();
+  if(!payload){setRankResult('ENDLESS 처치 수가 생기면 랭킹 등록이 가능합니다.');syncRankControls();return;}
+  storePendingRank(payload);
+  setRankResult('랭킹 등록 대기: ENDLESS '+rankNum(payload.score)+'킬');
+  if(rankConfigReady()&&SOOP_AUTH.accessToken)submitPendingRank(false);
+}
+async function submitPendingRank(manual=true){
+  const payload=readPendingRank();
+  if(!payload){setRankResult('등록할 ENDLESS 기록이 없습니다.');syncRankControls();return false;}
+  if(!rankConfigReady()){setRankResult('Firebase/SOOP 설정이 아직 비어 있습니다.');syncRankControls();return false;}
+  if(!SOOP_AUTH.accessToken){setRankResult('SOOP 로그인 후 랭킹 등록이 가능합니다.');if(manual)await soopLogin();return false;}
+  try{
+    await initFirebaseRanking();await fetchSoopProfile();
+    const fn=FB_RANK.functions.httpsCallable(RANKING_CONFIG.submitFunction);
+    const res=await fn({soopAccessToken:SOOP_AUTH.accessToken,run:payload});
+    const out=(res&&res.data)||{},nick=out.nick||SOOP_AUTH.nick||'SOOP';
+    localStorage.removeItem(RANK_PENDING_KEY);
+    setRankResult(out.updated===false?(`${nick} 기존 최고 기록 유지 · ${rankNum(out.score||payload.score)}킬`):(`${nick} 랭킹 등록 완료 · ${rankNum(out.score||payload.score)}킬`));
+    await loadRankings();syncRankControls();return true;
+  }catch(e){setRankResult('랭킹 등록 실패: '+(e.message||e));syncRankControls();return false;}
+}
+async function initRankingServices(){
+  readStoredSoopAuth();syncRankControls();renderRankList([]);
+  if(!rankConfigReady())return;
+  try{if(!RANKING_CONFIG.soop.tokenApi)await initSoopSdk();await handleSoopRedirect();await initFirebaseRanking();await loadRankings();if(SOOP_AUTH.accessToken&&readPendingRank())submitPendingRank(false);}
+  catch(e){setRankStatus('랭킹 서비스 준비 실패: '+e.message);}
+}
 function resetProfileState(){
   UNLOCKED.clear();for(const id of BASE_UNLOCKS)UNLOCKED.add(id);
   for(const k in META_DEFAULT)META[k]=META_DEFAULT[k];
@@ -1071,7 +1378,7 @@ function loadProfile(manual=true){
 }
 function showProfileMenu(){
   titleScreen.classList.remove('hidden');goScreen.classList.add('hidden');hud.classList.add('hidden');
-  profileMenu.classList.remove('hidden');charSelectPane.classList.add('hidden');refreshProfileMenu();
+  profileMenu.classList.remove('hidden');charSelectPane.classList.add('hidden');refreshProfileMenu();loadRankings();
 }
 function showCharSelect(msg){
   titleScreen.classList.remove('hidden');goScreen.classList.add('hidden');hud.classList.add('hidden');
@@ -1109,7 +1416,7 @@ function buildCharSelect(){
       g.appendChild(card);}
     block.appendChild(g);grid.appendChild(block);}
 }
-function startGame(c){requestLandscapeMode();newGame(c);titleScreen.classList.add('hidden');goScreen.classList.add('hidden');pauseScreen.classList.add('hidden');hud.classList.remove('hidden');updateStageBgm();last=performance.now();}
+function startGame(c){requestLandscapeMode();newGame(c);setRankResult('');titleScreen.classList.add('hidden');goScreen.classList.add('hidden');pauseScreen.classList.add('hidden');hud.classList.remove('hidden');updateStageBgm();last=performance.now();}
 function syncHUD(){const p=G.player;
   $('hpfill').style.width=clamp(p.hp/p.maxhp*100,0,100)+'%';$('hplabel').textContent='HP '+Math.max(0,Math.ceil(p.hp))+' / '+p.maxhp;
   $('shbar').style.display=p.shieldMax>0?'block':'none';if(p.shieldMax>0)$('shfill').style.width=clamp(p.shield/p.shieldMax*100,0,100)+'%';
@@ -1146,9 +1453,12 @@ function finishRun(isClear){
   $('unlockNote').textContent=newly.length?('🔓 해금: '+newly.join(', ')):'';
   buildCharSelect();saveProfile(false);
 }
-function gameOver(){G.over=true;stopBgm();pauseScreen.classList.add('hidden');$('goTitle').textContent=G.clearCredited?'RECORD':'GG';$('goStage').textContent=G.stage;$('goTime').textContent=fmtTime(G.time);$('goKills').textContent=G.kills;$('goLevel').textContent=G.level;$('goChar').innerHTML=`<b style="color:${RACES[G.char.race].col}">${G.char.id}</b> · ${G.char.ko} · ${G.char.unit}${G.endless?' · ENDLESS '+G.endlessKills+' / BEST '+META.endlessBest:''}`;finishRun(!!G.clearCredited);hud.classList.add('hidden');goScreen.classList.remove('hidden');}
-function victory(){G.over=true;G.maxStage=3;pauseScreen.classList.add('hidden');$('goTitle').textContent='CLEAR!';$('goStage').textContent='3';$('goTime').textContent=fmtTime(G.time);$('goKills').textContent=G.kills;$('goLevel').textContent=G.level;$('goChar').innerHTML=`<b style="color:${RACES[G.char.race].col}">${G.char.id}</b> · 3스테이지 정복! 🏆`;finishRun(true);hud.classList.add('hidden');goScreen.classList.remove('hidden');}
+function gameOver(){G.over=true;stopBgm();pauseScreen.classList.add('hidden');$('goTitle').textContent=G.clearCredited?'RECORD':'GG';$('goStage').textContent=G.stage;$('goTime').textContent=fmtTime(G.time);$('goKills').textContent=G.kills;$('goLevel').textContent=G.level;$('goChar').innerHTML=`<b style="color:${RACES[G.char.race].col}">${G.char.id}</b> · ${G.char.ko} · ${G.char.unit}${G.endless?' · ENDLESS '+G.endlessKills+' / BEST '+META.endlessBest:''}`;finishRun(!!G.clearCredited);queueRankFromCurrentRun();hud.classList.add('hidden');goScreen.classList.remove('hidden');}
+function victory(){G.over=true;G.maxStage=3;pauseScreen.classList.add('hidden');$('goTitle').textContent='CLEAR!';$('goStage').textContent='3';$('goTime').textContent=fmtTime(G.time);$('goKills').textContent=G.kills;$('goLevel').textContent=G.level;$('goChar').innerHTML=`<b style="color:${RACES[G.char.race].col}">${G.char.id}</b> · 3스테이지 정복! 🏆`;finishRun(true);queueRankFromCurrentRun();hud.classList.add('hidden');goScreen.classList.remove('hidden');}
 $('retryBtn').addEventListener('click',()=>showCharSelect('선수 선택 · '+profileSummary()));
+$('soopLoginBtn').addEventListener('click',soopLogin);
+$('rankRefreshBtn').addEventListener('click',loadRankings);
+$('rankSubmitBtn').addEventListener('click',()=>submitPendingRank(true));
 $('pauseBtn').addEventListener('click',openSettings);
 $('bgmBtn').addEventListener('click',toggleBgm);
 $('bgmPlayBtn').addEventListener('click',toggleBgm);
@@ -1164,6 +1474,7 @@ bindLandscapeGate();
 wireAssets();
 _loadDefaultSprites();
 loadAudioSettings();
+initRankingServices();
 buildCharSelect();
 showProfileMenu();
 </script>
