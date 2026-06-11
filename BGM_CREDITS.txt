@@ -1,0 +1,21 @@
+MONSTARZ SURVIVORS BGM CREDITS
+
+All bundled BGM files are sourced from OpenGameArt entries marked CC0 / Public Domain.
+
+stage1_terran.mp3
+- Source file: specular_city.mp3
+- Source page: https://opengameart.org/content/specular-city
+- Intended use: Stage 1 / Terran-style energetic sci-fi BGM
+- License: CC0 / Public Domain as listed on OpenGameArt
+
+stage2_zerg.mp3
+- Source file: claimed_by_the_void_loop.mp3
+- Source page: https://opengameart.org/content/claimed-by-the-void
+- Intended use: Stage 2 / Zerg-style dark sci-fi loop BGM
+- License: CC0 / Public Domain as listed on OpenGameArt
+
+stage3_protoss.mp3
+- Source file: outer_space.mp3
+- Source page: https://opengameart.org/content/outer-space-loop
+- Intended use: Stage 3 / Protoss-style cosmic sci-fi ambience
+- License: CC0 / Public Domain as listed on OpenGameArt
