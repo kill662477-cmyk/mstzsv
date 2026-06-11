@@ -639,7 +639,7 @@ function fire(id,w){
     if(tgt){let a0=Math.atan2(tgt.y-p.y,tgt.x-p.x);for(let i=0;i<count;i++){const a=a0+(i-(count-1)/2)*0.12;G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*950,vy:Math.sin(a)*950,r:6,dmg,pierce,hits:[],life:1.2,kind:'snipe'});
       G.beams.push({x1:p.x,y1:p.y,x2:tgt.x+Math.cos(a)*60,y2:tgt.y+Math.sin(a)*60,t:0});}}
   } else if(k==='heal'){
-    const heal=B.heal*0.20*(1+0.12*special),radius=B.radius*area,dmg=weaponDamage(w,B.dmg,0.10);
+    const heal=B.heal*0.10*(1+0.12*special),radius=B.radius*area,dmg=weaponDamage(w,B.dmg,0.10);
     const count=(B.count||1)+Math.floor(countLv/3),pierce=(B.pierce||0)+Math.floor(special/3),gunDmg=weaponDamage(w,B.gunDmg||7,0.12),speed=(B.speed||540)*(1+special*0.035);
     const tgt=nearestTarget(p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
     for(const a of volleyAngles(a0,count,0.18))G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:5.5,dmg:gunDmg,pierce,hits:[],life:1.35,kind:'medic'});
