@@ -351,10 +351,14 @@ const RANKING_CONFIG={
 };
 const UNLOCKED=new Set(BASE_UNLOCKS);
 const META={...META_DEFAULT};
+const XP_MULT=1.8; // 레벨업 속도 조절: 클수록 빠름(획득 경험치 배수)
 function xpRequirement(level){
-  if(level<=12)return Math.max(3,Math.floor(2+level*1.6+level*level*0.11));
-  const mid=Math.max(0,level-12),late=Math.max(0,level-28),end=Math.max(0,level-45);
-  return Math.max(3,Math.floor(2+level*1.75+level*level*0.13+mid*(1.05+mid*0.075)+late*(2.2+late*0.19)+end*(4.0+end*0.32)));
+  let need;
+  if(level<=12){need=2+level*1.6+level*level*0.11;}
+  else{const mid=Math.max(0,level-12),late=Math.max(0,level-28),end=Math.max(0,level-45);
+    need=2+level*1.75+level*level*0.13+mid*(1.05+mid*0.075)+late*(2.2+late*0.19)+end*(4.0+end*0.32);}
+  const ease=level<=60?0.7:(level>=72?1.0:0.7+0.3*((level-60)/12));need*=ease; // 1~60렙 요구 경험치 -30%, 60~72구간서 원곡선 복귀
+  return Math.max(3,Math.floor(need));
 }
 
 /* ---------- state ---------- */
@@ -492,6 +496,9 @@ function showBanner(t){G.banner={txt:t,t:2.2};$('banner').textContent=t;$('banne
 function frenzyRamp(){
   const f=G.frenzyLv||0,t=Math.floor(f/3);
   if(f<=0)return {tier:0,cap:0,hp:0,speed:0,dmg:0,pressure:0,incoming:1};
+  // gentler early frenzy (1-2단계 난이도 완화)
+  if(f===1)return {tier:0,cap:140,hp:3.1,speed:0.27,dmg:1.50,pressure:3.50,incoming:2.20};
+  if(f===2)return {tier:0,cap:175,hp:3.6,speed:0.32,dmg:1.85,pressure:4.10,incoming:2.55};
   const over=Math.max(0,f-1);
   return {
     tier:t,
@@ -509,7 +516,7 @@ function bossShot(b,a,speed,dmg,r,life,kind){
 }
 function fireBossPattern(b,dx,dy,fr){
   const f=G.frenzyLv||0,stage=G.stage,base=Math.atan2(dy,dx),tier=fr.tier||0;
-  const speed=240+stage*25+f*18+tier*35,dmg=b.dmg*(0.65+f*0.04+fr.dmg*0.35);
+  const speed=240+stage*25+f*18+tier*35,dmg=b.dmg*0.65; // 광폭화 무관 원상태 데미지
   const patterns=stage>=3?3:(stage>=2?2:1),pat=(b.pattern||0)%patterns;b.pattern=(b.pattern||0)+1;
   if(pat===0){
     const n=10+stage*4+f*2+tier*5;
@@ -547,7 +554,7 @@ const ETYPES={
 };
 const EKMAP={ling:'walker',fast:'runner',tank:'brute',swarm:'swarmling',spit:'spitter'};
 function spawnEnemy(){
-  const f=G.frenzyLv||0,fr=frenzyRamp();if(G.enemies.length>=280+f*22+fr.cap+(G.endless?90:0))return;
+  const f=G.frenzyLv||0,fr=frenzyRamp();if(G.enemies.length>=280+(G.frenzyLv?0:140)+f*22+fr.cap+(G.endless?90:0))return;
   const t=G.stageTime;let pool=['ling'];
   if(t>30)pool=['ling','ling','ling','fast'];
   if(t>60)pool=['ling','ling','fast','swarm'];
@@ -609,8 +616,8 @@ function onDeath(t){
   if(G.killHeal>0){const p=G.player;p.hp=Math.min(p.maxhp,p.hp+G.killHeal);}
   for(let i=0;i<8;i++){const a=Math.random()*TAU,s=rand(40,160);G.parts.push({x:t.x,y:t.y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:rand(.25,.5),col:t.col,r:rand(2,4)});}
 }
-function takeDamage(d){const p=G.player;
-  d*=frenzyRamp().incoming;
+function takeDamage(d,fromBoss){const p=G.player;
+  if(!fromBoss)d*=frenzyRamp().incoming; // 보스 공격력은 광폭화 영향 없이 원상태
   if(p.shield>0){const a=Math.min(p.shield,d);p.shield-=a;d-=a;}
   if(d>0)p.hp-=d;
   p.noHit=0;p.hitcd=0.55;p.flash=0.25;G.shake=Math.max(G.shake,5);
@@ -702,7 +709,7 @@ function update(dt){
   // spawning
   if(G.phase!=='portal'){
     const fr=frenzyRamp();
-    G.spawnAcc+=dt;const baseI=Math.max(0.12,0.9-G.stageTime*0.0025),preGrowth=G.frenzyLv?1:2,pressure=preGrowth+(G.frenzyLv||0)*0.42+fr.pressure+(G.endless?0.9:0),interval=baseI/pressure;
+    G.spawnAcc+=dt;const baseI=Math.max(0.12,0.9-G.stageTime*0.0025),preGrowth=G.frenzyLv?1:3,pressure=preGrowth+(G.frenzyLv||0)*0.42+fr.pressure+(G.endless?0.9:0),interval=baseI/pressure;
     while(G.spawnAcc>=interval){G.spawnAcc-=interval;spawnEnemy();}
   }
 
@@ -774,9 +781,9 @@ function update(dt){
     const fr=frenzyRamp(),bossSpd=b.spd*(1+(G.frenzyLv||0)*0.04+fr.speed*0.7);b.x+=dx/m*bossSpd*dt+b.kb.x*dt;b.y+=dy/m*bossSpd*dt+b.kb.y*dt;b.kb.x*=0.9;b.kb.y*=0.9;
     clampToMap(b,b.r+12);
     if(b.hit>0)b.hit-=dt;
-    if(dist2(p.x,p.y,b.x,b.y)<(p.r+b.r)**2&&p.hitcd<=0){takeDamage(Math.max(1,b.dmg-G.armor));if(G.over)return;}
+    if(dist2(p.x,p.y,b.x,b.y)<(p.r+b.r)**2&&p.hitcd<=0){takeDamage(Math.max(1,b.dmg-G.armor),true);if(G.over)return;}
     b.shootT-=dt;if(b.shootT<=0)b.shootT=fireBossPattern(b,dx,dy,fr);}
-  for(const bs of G.bossShots){bs.x+=bs.vx*dt;bs.y+=bs.vy*dt;bs.life-=dt;if(dist2(p.x,p.y,bs.x,bs.y)<(p.r+bs.r)**2&&p.hitcd<=0){takeDamage(Math.max(1,Math.round(bs.dmg)-G.armor));bs.life=0;if(G.over)return;}}
+  for(const bs of G.bossShots){bs.x+=bs.vx*dt;bs.y+=bs.vy*dt;bs.life-=dt;if(dist2(p.x,p.y,bs.x,bs.y)<(p.r+bs.r)**2&&p.hitcd<=0){takeDamage(Math.max(1,Math.round(bs.dmg)-G.armor),true);bs.life=0;if(G.over)return;}}
   G.bossShots=G.bossShots.filter(b=>b.life>0);
 
   // enemies move + contact + separation
@@ -812,7 +819,7 @@ function xpGainScale(){
   const frenzyBoost=1+(G.frenzyLv||0)*0.025+(G.endless?0.10:0);
   return levelBoost*stageBoost*frenzyBoost;
 }
-function gainXP(v){G.xp+=v*G.xpMul*xpGainScale();while(G.xp>=G.xpNext){G.xp-=G.xpNext;G.level++;G.xpNext=xpRequirement(G.level);openLevelUp();}}
+function gainXP(v){G.xp+=v*G.xpMul*xpGainScale()*XP_MULT;while(G.xp>=G.xpNext){G.xp-=G.xpNext;G.level++;G.xpNext=xpRequirement(G.level);openLevelUp();}}
 
 /* ---------- render ---------- */
 
