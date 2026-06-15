@@ -348,7 +348,7 @@ const RANKING_CONFIG={
   functionsRegion:'asia-northeast3',
   collection:'monstarz_rankings',
   submitFunction:'submitRanking',
-  soop:{"clientId":"339180d798482f82dba3cd99121dccfe","clientSecret":"","redirectUri":"https://monstarznew.vercel.app/","authUrl":"https://openapi.sooplive.com/auth/code","tokenApi":"/api/soop-token","refreshApi":"/api/soop-refresh","rankListApi":"/api/survivors-rankings","rankSubmitApi":"/api/survivors-rank-submit","apiBase":"https://monstarznew.vercel.app","sdkUrl":"https://static.sooplive.com/asset/app/chat-sdk/sooplive-chat-sdk.js","stationInfoUrl":"https://openapi.sooplive.com/user/stationinfo"}
+  soop:{"clientId":"339180d798482f82dba3cd99121dccfe","clientSecret":"","redirectUri":"https://monstarznew.vercel.app/","authUrl":"https://openapi.sooplive.com/auth/code","tokenApi":"/api/soop-token","refreshApi":"/api/soop-refresh","apiBase":"https://monstarznew.vercel.app","sdkUrl":"https://static.sooplive.com/asset/app/chat-sdk/sooplive-chat-sdk.js","stationInfoUrl":"https://openapi.sooplive.com/user/stationinfo"}
 };
 const UNLOCKED=new Set(BASE_UNLOCKS);
 const META={...META_DEFAULT};
@@ -1110,8 +1110,8 @@ let FB_RANK={app:null,db:null,functions:null,promise:null};
 const SOOP_AUTH_MESSAGE='monstarz-soop-auth-v1';
 const SOOP_AUTH_POPUP_NAME='monstarz_soop_login';
 function rankConfigReady(){
-  const s=RANKING_CONFIG.soop;
-  return !!(s.clientId&&(s.tokenApi||s.clientSecret)&&s.rankListApi&&s.rankSubmitApi);
+  const f=RANKING_CONFIG.firebase,s=RANKING_CONFIG.soop;
+  return !!(f.apiKey&&f.authDomain&&f.projectId&&f.appId&&s.clientId&&(s.tokenApi||s.clientSecret));
 }
 function soopRedirectUri(){const s=RANKING_CONFIG.soop;return s.redirectUri||location.origin+location.pathname;}
 function soopApiUrl(path){
@@ -1335,10 +1335,9 @@ function renderRankList(rows){
 async function loadRankings(){
   if(!rankConfigReady()){syncRankControls();renderRankList([]);return;}
   try{
-    const r=await fetch(soopApiUrl(RANKING_CONFIG.soop.rankListApi),{cache:'no-store'});
-    const data=await r.json().catch(()=>({}));
-    if(!r.ok||data.error)throw new Error(data.message||data.error||('랭킹 HTTP '+r.status));
-    renderRankList(data.rankings||data.rows||[]);
+    await initFirebaseRanking();
+    const snap=await FB_RANK.db.collection(RANKING_CONFIG.collection).orderBy('score','desc').limit(10).get();
+    renderRankList(snap.docs.map(d=>({id:d.id,...d.data()})));
     setRankStatus((SOOP_AUTH.nick?'SOOP: '+SOOP_AUTH.nick:'SOOP 로그인 필요')+' · ENDLESS 처치 수 기준 TOP 10');
   }catch(e){setRankStatus('랭킹 불러오기 실패: '+e.message);}
   syncRankControls();
@@ -1370,15 +1369,10 @@ async function submitPendingRank(manual=true){
   if(!rankConfigReady()){setRankResult('Firebase/SOOP 설정이 아직 비어 있습니다.');syncRankControls();return false;}
   if(!SOOP_AUTH.accessToken){setRankResult('SOOP 로그인 후 랭킹 등록이 가능합니다.');if(manual)await soopLogin();return false;}
   try{
-    await fetchSoopProfile();
-    const r=await fetch(soopApiUrl(RANKING_CONFIG.soop.rankSubmitApi),{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({soopAccessToken:SOOP_AUTH.accessToken,run:payload})
-    });
-    const out=await r.json().catch(()=>({}));
-    if(!r.ok||out.error)throw new Error(out.message||out.error||('랭킹 HTTP '+r.status));
-    const nick=out.nick||SOOP_AUTH.nick||'SOOP';
+    await initFirebaseRanking();await fetchSoopProfile();
+    const fn=FB_RANK.functions.httpsCallable(RANKING_CONFIG.submitFunction);
+    const res=await fn({soopAccessToken:SOOP_AUTH.accessToken,run:payload});
+    const out=(res&&res.data)||{},nick=out.nick||SOOP_AUTH.nick||'SOOP';
     localStorage.removeItem(RANK_PENDING_KEY);
     setRankResult(out.updated===false?(`${nick} 기존 최고 기록 유지 · ${rankNum(out.score||payload.score)}킬`):(`${nick} 랭킹 등록 완료 · ${rankNum(out.score||payload.score)}킬`));
     await loadRankings();syncRankControls();return true;
@@ -1387,7 +1381,7 @@ async function submitPendingRank(manual=true){
 async function initRankingServices(){
   readStoredSoopAuth();syncRankControls();renderRankList([]);
   if(!rankConfigReady())return;
-  try{if(!RANKING_CONFIG.soop.tokenApi)await initSoopSdk();await handleSoopRedirect();await loadRankings();if(SOOP_AUTH.accessToken&&readPendingRank())submitPendingRank(false);}
+  try{if(!RANKING_CONFIG.soop.tokenApi)await initSoopSdk();await handleSoopRedirect();await initFirebaseRanking();await loadRankings();if(SOOP_AUTH.accessToken&&readPendingRank())submitPendingRank(false);}
   catch(e){setRankStatus('랭킹 서비스 준비 실패: '+e.message);}
 }
 function resetProfileState(){
