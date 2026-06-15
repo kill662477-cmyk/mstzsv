@@ -1106,8 +1106,6 @@ function stopBgm(){if(BGM)BGM.pause();syncBgmUi();}
 const SCRIPT_PROMISES={};
 let SOOP_AUTH={sdk:null,accessToken:'',refreshToken:'',nick:'',stationName:''};
 let FB_RANK={app:null,db:null,functions:null,promise:null};
-const SOOP_AUTH_MESSAGE='monstarz-soop-auth-v1';
-const SOOP_AUTH_POPUP_NAME='monstarz_soop_login';
 function rankConfigReady(){
   const f=RANKING_CONFIG.firebase,s=RANKING_CONFIG.soop;
   return !!(f.apiKey&&f.authDomain&&f.projectId&&f.appId&&s.clientId&&(s.tokenApi||s.clientSecret));
@@ -1119,11 +1117,8 @@ function soopApiUrl(path){
   const s=RANKING_CONFIG.soop,base=s.apiBase||location.origin;
   try{return new URL(path,base).href;}catch(e){return path;}
 }
-function isEmbeddedFrame(){
-  try{return window.self!==window.top;}catch(e){return true;}
-}
 function buildSoopAuthUrl(){
-  const s=RANKING_CONFIG.soop,state='mstzsv_rank_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+  const s=RANKING_CONFIG.soop,state='rank_'+Date.now()+'_'+Math.random().toString(36).slice(2);
   try{sessionStorage.setItem(SOOP_STATE_KEY,state);}catch(e){}
   const params=new URLSearchParams();
   params.set('client_id',s.clientId);
@@ -1137,7 +1132,7 @@ function setRankStatus(msg){const el=$('rankStatus');if(el)el.textContent=msg;}
 function setRankResult(msg){const el=$('rankResult');if(el)el.textContent=msg||'';}
 function syncRankControls(){
   const ready=rankConfigReady(),login=$('soopLoginBtn'),refresh=$('rankRefreshBtn'),submit=$('rankSubmitBtn');
-  if(login){login.disabled=!ready;login.textContent=SOOP_AUTH.nick?('SOOP: '+SOOP_AUTH.nick):(SOOP_AUTH.accessToken?'SOOP 로그인됨':'SOOP 로그인');}
+  if(login){login.disabled=!ready;login.textContent=SOOP_AUTH.nick?('SOOP: '+SOOP_AUTH.nick):'SOOP 로그인';}
   if(refresh)refresh.disabled=!ready;
   if(submit)submit.disabled=!readPendingRank();
   if(!ready)setRankStatus('Firebase/SOOP 설정 필요: RANKING_CONFIG 값을 채운 뒤 Cloud Function을 배포하세요.');
@@ -1227,29 +1222,6 @@ async function fetchSoopProfile(){
     return data;
   }catch(e){return null;}
 }
-async function applySoopAuth(auth,msg){
-  const clean=normalizeSoopAuth(auth);
-  if(!clean.accessToken)return false;
-  SOOP_AUTH={...SOOP_AUTH,...clean};saveStoredSoopAuth();syncRankControls();
-  await fetchSoopProfile();syncRankControls();
-  if(msg)setRankStatus(msg);
-  if(readPendingRank())submitPendingRank(false);
-  return true;
-}
-function notifySoopAuthOpener(){
-  try{
-    if(window.opener&&!window.opener.closed){
-      window.opener.postMessage({type:SOOP_AUTH_MESSAGE,auth:{
-        accessToken:SOOP_AUTH.accessToken,
-        refreshToken:SOOP_AUTH.refreshToken,
-        nick:SOOP_AUTH.nick,
-        stationName:SOOP_AUTH.stationName
-      }},location.origin);
-      return true;
-    }
-  }catch(e){}
-  return false;
-}
 async function handleSoopRedirect(){
   if(!rankConfigReady())return;
   const url=new URL(location.href),code=url.searchParams.get('authCode')||url.searchParams.get('code');
@@ -1258,12 +1230,7 @@ async function handleSoopRedirect(){
     const state=url.searchParams.get('state')||'',saved=sessionStorage.getItem(SOOP_STATE_KEY)||'';
     if(saved&&state&&saved!==state)throw new Error('SOOP OAuth state mismatch');
     const auth=await exchangeSoopCode(code);
-    if(await applySoopAuth(auth,'SOOP 로그인 완료. 랭킹 등록은 SOOP 닉네임으로 저장됩니다.')){
-      if(notifySoopAuthOpener()){
-        setRankStatus('SOOP 로그인 완료. 게임 창으로 돌아갑니다.');
-        setTimeout(()=>{try{window.close();}catch(e){}},450);
-      }
-    }
+    if(auth.accessToken){SOOP_AUTH={...SOOP_AUTH,...auth};saveStoredSoopAuth();await fetchSoopProfile();setRankStatus('SOOP 로그인 완료. 랭킹 등록은 SOOP 닉네임으로 저장됩니다.');}
   }catch(e){setRankStatus('SOOP 로그인 처리 실패: '+e.message);}
   finally{
     try{sessionStorage.removeItem(SOOP_STATE_KEY);}catch(e){}
@@ -1271,24 +1238,11 @@ async function handleSoopRedirect(){
     history.replaceState(null,'',url.pathname+(url.search?url.search:'')+url.hash);
   }
 }
-window.addEventListener('message',e=>{
-  if(e.origin!==location.origin||!e.data||e.data.type!==SOOP_AUTH_MESSAGE)return;
-  applySoopAuth(e.data.auth,'SOOP 로그인 완료. 랭킹 등록은 SOOP 닉네임으로 저장됩니다.')
-    .catch(err=>setRankStatus('SOOP 로그인 처리 실패: '+(err&&err.message?err.message:err)));
-});
 async function soopLogin(){
   if(!rankConfigReady()){syncRankControls();return;}
   try{
     setRankStatus('SOOP 로그인 페이지로 이동합니다...');
-    if(RANKING_CONFIG.soop.tokenApi){
-      const authUrl=buildSoopAuthUrl();
-      if(isEmbeddedFrame()){
-        const popup=window.open(authUrl,SOOP_AUTH_POPUP_NAME,'popup=yes,width=520,height=720');
-        if(popup){popup.focus();setRankStatus('SOOP 로그인 창에서 인증을 완료하세요.');return;}
-        try{window.top.location.href=authUrl;return;}catch(e){}
-      }
-      location.href=authUrl;return;
-    }
+    if(RANKING_CONFIG.soop.tokenApi){location.href=buildSoopAuthUrl();return;}
     await initSoopSdk();SOOP_AUTH.sdk.openAuth();
   }
   catch(e){setRankStatus('SOOP SDK 준비 실패: '+e.message);}
