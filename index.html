@@ -59,7 +59,6 @@
   .rankRow b{color:var(--lime);font-family:var(--display);font-size:12px}
   .rankRow span:nth-child(2){overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#e6e0ff}
   .rankResult{color:var(--cyan);font-size:12px;line-height:1.45;max-width:480px;min-height:18px}
-  #rankPanel,#rankResult,#rankSubmitBtn{display:none!important}
   button.btn{font-family:var(--display);text-transform:uppercase;letter-spacing:2px;font-size:18px;padding:12px 30px;border:none;cursor:pointer;border-radius:12px;color:#08110a;margin-top:6px;
     background:linear-gradient(180deg,#d9ff7a,var(--lime) 55%,var(--lime2));box-shadow:0 0 18px rgba(182,255,46,.45),0 6px 0 #4f8f12;transition:transform .08s}
   button.btn:active{transform:translateY(3px);box-shadow:0 0 18px rgba(182,255,46,.45),0 3px 0 #4f8f12}
@@ -156,14 +155,6 @@
     <button class="btn" id="loadProfileBtn">불러오기</button>
   </div>
   <div id="profileStatus" class="loadstat"></div>
-  <div id="rankPanel" class="rankPanel">
-    <div class="rankTools">
-      <button class="btn2" id="soopLoginBtn">SOOP 로그인</button>
-      <button class="btn2" id="rankRefreshBtn">랭킹 새로고침</button>
-    </div>
-    <div id="rankStatus" class="rankStatus">랭킹은 Firebase/SOOP 설정 후 활성화됩니다.</div>
-    <div id="rankList" class="rankList"></div>
-  </div>
   <div id="charSelectPane" class="hidden">
     <div class="profileTools">
       <button class="btn2" id="backProfileBtn">메인 메뉴</button>
@@ -183,8 +174,6 @@
   <div class="stat"><div>STAGE<b id="goStage">1</b></div><div>SURVIVED<b id="goTime">00:00</b></div><div>KILLS<b id="goKills">0</b></div><div>LEVEL<b id="goLevel">1</b></div></div>
   <div class="hint" id="goChar"></div>
   <div id="unlockNote"></div>
-  <div id="rankResult" class="rankResult"></div>
-  <button class="btn2" id="rankSubmitBtn">랭킹 등록</button>
   <button class="btn" id="retryBtn">선수 선택으로</button>
 </div>
 
@@ -1463,9 +1452,9 @@ function finishRun(isClear){
 function gameOver(){G.over=true;stopBgm();pauseScreen.classList.add('hidden');$('goTitle').textContent=G.clearCredited?'RECORD':'GG';$('goStage').textContent=G.stage;$('goTime').textContent=fmtTime(G.time);$('goKills').textContent=G.kills;$('goLevel').textContent=G.level;$('goChar').innerHTML=`<b style="color:${RACES[G.char.race].col}">${G.char.id}</b> · ${G.char.ko} · ${G.char.unit}${G.endless?' · ENDLESS '+G.endlessKills+' / BEST '+META.endlessBest:''}`;finishRun(!!G.clearCredited);queueRankFromCurrentRun();hud.classList.add('hidden');goScreen.classList.remove('hidden');}
 function victory(){G.over=true;G.maxStage=3;pauseScreen.classList.add('hidden');$('goTitle').textContent='CLEAR!';$('goStage').textContent='3';$('goTime').textContent=fmtTime(G.time);$('goKills').textContent=G.kills;$('goLevel').textContent=G.level;$('goChar').innerHTML=`<b style="color:${RACES[G.char.race].col}">${G.char.id}</b> · 3스테이지 정복! 🏆`;finishRun(true);queueRankFromCurrentRun();hud.classList.add('hidden');goScreen.classList.remove('hidden');}
 $('retryBtn').addEventListener('click',()=>showCharSelect('선수 선택 · '+profileSummary()));
-$('soopLoginBtn').addEventListener('click',soopLogin);
-$('rankRefreshBtn').addEventListener('click',loadRankings);
-$('rankSubmitBtn').addEventListener('click',()=>submitPendingRank(true));
+const soopLoginBtn=$('soopLoginBtn');if(soopLoginBtn)soopLoginBtn.addEventListener('click',soopLogin);
+const rankRefreshBtn=$('rankRefreshBtn');if(rankRefreshBtn)rankRefreshBtn.addEventListener('click',loadRankings);
+const rankSubmitBtn=$('rankSubmitBtn');if(rankSubmitBtn)rankSubmitBtn.addEventListener('click',()=>submitPendingRank(true));
 $('pauseBtn').addEventListener('click',openSettings);
 $('bgmBtn').addEventListener('click',toggleBgm);
 $('bgmPlayBtn').addEventListener('click',toggleBgm);
