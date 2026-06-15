@@ -158,6 +158,7 @@
   <div id="rankPanel" class="rankPanel">
     <div class="rankTools">
       <button class="btn2" id="soopLoginBtn">SOOP 로그인</button>
+      <button class="btn2" id="soopLogoutBtn" hidden>SOOP 로그아웃</button>
       <button class="btn2" id="rankRefreshBtn">랭킹 새로고침</button>
     </div>
     <div id="rankStatus" class="rankStatus">랭킹은 Firebase/SOOP 설정 후 활성화됩니다.</div>
@@ -1136,8 +1137,10 @@ function rankNum(n){return Number(n||0).toLocaleString('ko-KR');}
 function setRankStatus(msg){const el=$('rankStatus');if(el)el.textContent=msg;}
 function setRankResult(msg){const el=$('rankResult');if(el)el.textContent=msg||'';}
 function syncRankControls(){
-  const ready=rankConfigReady(),login=$('soopLoginBtn'),refresh=$('rankRefreshBtn'),submit=$('rankSubmitBtn');
-  if(login){login.disabled=!ready;login.textContent=SOOP_AUTH.nick?('SOOP: '+SOOP_AUTH.nick):(SOOP_AUTH.accessToken?'SOOP 로그인됨':'SOOP 로그인');}
+  const ready=rankConfigReady(),login=$('soopLoginBtn'),logout=$('soopLogoutBtn'),refresh=$('rankRefreshBtn'),submit=$('rankSubmitBtn');
+  const loggedIn=!!SOOP_AUTH.accessToken;
+  if(login){login.disabled=!ready;login.textContent=SOOP_AUTH.nick?('SOOP: '+SOOP_AUTH.nick):(loggedIn?'SOOP 로그인됨':'SOOP 로그인');}
+  if(logout){logout.hidden=!loggedIn;logout.disabled=!ready||!loggedIn;}
   if(refresh)refresh.disabled=!ready;
   if(submit)submit.disabled=!readPendingRank();
   if(!ready)setRankStatus('Firebase/SOOP 설정 필요: RANKING_CONFIG 값을 채운 뒤 Cloud Function을 배포하세요.');
@@ -1292,6 +1295,15 @@ async function soopLogin(){
     await initSoopSdk();SOOP_AUTH.sdk.openAuth();
   }
   catch(e){setRankStatus('SOOP SDK 준비 실패: '+e.message);}
+}
+function soopLogout(){
+  try{localStorage.removeItem(SOOP_AUTH_KEY);}catch(e){}
+  try{sessionStorage.removeItem(SOOP_STATE_KEY);}catch(e){}
+  try{if(SOOP_AUTH.sdk&&SOOP_AUTH.sdk.disconnect)SOOP_AUTH.sdk.disconnect();}catch(e){}
+  SOOP_AUTH={...SOOP_AUTH,accessToken:'',refreshToken:'',nick:'',stationName:''};
+  setRankStatus('SOOP 로그아웃 완료. 랭킹 등록은 다시 로그인 후 가능합니다.');
+  setRankResult('');
+  syncRankControls();
 }
 async function initFirebaseRanking(){
   if(!rankConfigReady()){syncRankControls();return null;}
@@ -1510,6 +1522,7 @@ function gameOver(){G.over=true;stopBgm();pauseScreen.classList.add('hidden');$(
 function victory(){G.over=true;G.maxStage=3;pauseScreen.classList.add('hidden');$('goTitle').textContent='CLEAR!';$('goStage').textContent='3';$('goTime').textContent=fmtTime(G.time);$('goKills').textContent=G.kills;$('goLevel').textContent=G.level;$('goChar').innerHTML=`<b style="color:${RACES[G.char.race].col}">${G.char.id}</b> · 3스테이지 정복! 🏆`;finishRun(true);queueRankFromCurrentRun();hud.classList.add('hidden');goScreen.classList.remove('hidden');}
 $('retryBtn').addEventListener('click',()=>showCharSelect('선수 선택 · '+profileSummary()));
 $('soopLoginBtn').addEventListener('click',soopLogin);
+$('soopLogoutBtn').addEventListener('click',soopLogout);
 $('rankRefreshBtn').addEventListener('click',loadRankings);
 $('rankSubmitBtn').addEventListener('click',()=>submitPendingRank(true));
 $('pauseBtn').addEventListener('click',openSettings);
