@@ -59,6 +59,7 @@
   .rankRow b{color:var(--lime);font-family:var(--display);font-size:12px}
   .rankRow span:nth-child(2){overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#e6e0ff}
   .rankResult{color:var(--cyan);font-size:12px;line-height:1.45;max-width:480px;min-height:18px}
+  #rankPanel,#rankResult,#rankSubmitBtn{display:none!important}
   button.btn{font-family:var(--display);text-transform:uppercase;letter-spacing:2px;font-size:18px;padding:12px 30px;border:none;cursor:pointer;border-radius:12px;color:#08110a;margin-top:6px;
     background:linear-gradient(180deg,#d9ff7a,var(--lime) 55%,var(--lime2));box-shadow:0 0 18px rgba(182,255,46,.45),0 6px 0 #4f8f12;transition:transform .08s}
   button.btn:active{transform:translateY(3px);box-shadow:0 0 18px rgba(182,255,46,.45),0 3px 0 #4f8f12}
@@ -1107,8 +1108,7 @@ const SCRIPT_PROMISES={};
 let SOOP_AUTH={sdk:null,accessToken:'',refreshToken:'',nick:'',stationName:''};
 let FB_RANK={app:null,db:null,functions:null,promise:null};
 function rankConfigReady(){
-  const f=RANKING_CONFIG.firebase,s=RANKING_CONFIG.soop;
-  return !!(f.apiKey&&f.authDomain&&f.projectId&&f.appId&&s.clientId&&(s.tokenApi||s.clientSecret));
+  return false;
 }
 function soopRedirectUri(){const s=RANKING_CONFIG.soop;return s.redirectUri||location.origin+location.pathname;}
 function soopApiUrl(path){
