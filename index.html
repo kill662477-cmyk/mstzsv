@@ -235,14 +235,14 @@ const WEAPONS={
   archon  :{name:'사이오닉 노바',icon:'☄️',owner:'TYSON',  kind:'nova',  base:{cd:1.50,dmg:18,maxR:155,dur:0.4}},
   carrier :{name:'인터셉터',     icon:'🛩️',owner:'PADO',   kind:'orbit', base:{count:2,radius:80,dmg:6,rot:2.4,hitcd:0.45}},
   storm   :{name:'사이오닉 스톰',icon:'⚡',owner:'SONG',   kind:'field', base:{cd:3.0,dmg:5,radius:92,dur:2.6,tick:0.4,slow:0.4}},
-  dragoon :{name:'팬텀 디스럽터',icon:'🔵',owner:'RANG',   kind:'shot',  base:{cd:0.95,dmg:14,speed:430,count:1,pierce:2}},
+  dragoon :{name:'팬텀 디스럽터',icon:'🔵',owner:'RANG',   kind:'shot',  base:{cd:0.95,dmg:14,speed:430,count:1,pierce:2,aim:'high'}},
   reaver  :{name:'스캐럽',       icon:'🪲',owner:'CHU',    kind:'scarab',base:{cd:1.40,dmg:14,speed:210,explodeR:66}},
   // terran
   marine  :{name:'사격',         icon:'🔫',owner:'500',    kind:'shot',  base:{cd:0.70,dmg:7,speed:540,count:1,pierce:0}},
-  ghost   :{name:'저격 · 락다운',icon:'🎯',owner:'CHAMCHI',kind:'snipe', base:{cd:1.60,dmg:42,pierce:1}},
+  ghost   :{name:'저격 · 락다운',icon:'🎯',owner:'CHAMCHI',kind:'snipe', base:{cd:1.60,dmg:32,pierce:1}},
   medic   :{name:'치유의 빛',    icon:'➕',owner:'SUN',    kind:'heal',  base:{cd:1.40,heal:14,radius:120,dmg:4,gunDmg:7,speed:540,count:1,pierce:0}},
   siege   :{name:'시즈 포격',    icon:'💥',owner:'JDD',    kind:'arty',  base:{cd:1.70,dmg:17,radius:74,delay:0.45}},
-  vulture :{name:'스파이더 마인',icon:'🕷️',owner:'SAMPLE', kind:'mine',  base:{cd:1.30,dmg:26,radius:64,trig:44,arm:0.4}},
+  vulture :{name:'스파이더 마인',icon:'🕷️',owner:'SAMPLE', kind:'mine',  base:{cd:1.30,dmg:40,radius:128,trig:44,arm:0.4,spd:300}},
   firebat :{name:'화염 방사',    icon:'🔥',owner:'AMPLE',  kind:'flame', base:{cd:0.22,dmg:4,radius:118,arc:0.95}},
   // zerg
   zergling:{name:'저글링 떼',    icon:'🐛',owner:'NANGNI', kind:'minion',base:{cd:2.20,dmg:5,count:3,dur:3.5,speed:245}},
@@ -250,7 +250,7 @@ const WEAPONS={
   ultra   :{name:'쇄도',         icon:'🌪️',owner:'KILLER', kind:'cleave',base:{cd:0.55,dmg:11,radius:92}},
   muta    :{name:'글레이브',     icon:'🌀',owner:'ZOE',    kind:'chain', base:{cd:0.85,dmg:8,speed:560,bounces:3}},
   hydra   :{name:'가시 산탄',    icon:'🦴',owner:'BRIGHT', kind:'spread',base:{cd:1.30,dmg:6,speed:430,count:3,spread:0.42}},
-  queen   :{name:'브루들링',     icon:'🥚',owner:'JJI',    kind:'minion',base:{cd:3.0,dmg:11,count:1,dur:5.0,speed:210}},
+  queen   :{name:'브루들링',     icon:'🥚',owner:'JJI',    kind:'minion',base:{cd:3.0,dmg:11,count:1,dur:5.0,speed:210,aim:'high'}},
   infestor:{name:'펑걸',         icon:'🍄',owner:'HM',     kind:'field', base:{cd:3.0,dmg:4,radius:96,dur:2.8,tick:0.4,slow:0.85}},
   lurker  :{name:'가시 분출',    icon:'🌵',owner:'72',     kind:'spikes',base:{cd:1.30,dmg:15,length:185,width:62}},
 };
@@ -276,9 +276,9 @@ function volleyAngles(base,count,step=0.36){
 }
 function weaponUpgradeStats(id,w){
   const kind=WEAPONS[id].kind,stats=['dmg','haste'];
-  if(['shot','spread','chain','scarab','snipe','siege','arty','minion','mine','carrier','heal'].includes(kind))stats.push('count');
-  if(['arc','cleave','nova','siege','arty','field','mine','flame','spikes','scarab','heal','carrier'].includes(kind))stats.push('area');
-  if(['shot','spread','chain','scarab','snipe','field','minion','heal','arc','flame','spikes'].includes(kind))stats.push('special');
+  if(['shot','spread','chain','scarab','snipe','arty','minion','mine','heal','orbit'].includes(kind))stats.push('count');
+  if(['cleave','arty','field','mine','flame','spikes','scarab','heal','orbit'].includes(kind))stats.push('area');
+  if(['shot','spread','chain','scarab','snipe','field','minion','heal','flame','arty'].includes(kind))stats.push('special');
   return stats;
 }
 function weaponUpgradeOption(id,w){
@@ -311,7 +311,7 @@ const ROSTER=[
   {id:'CHAMCHI',spr:'chamchi_ghost',ko:'지동원', race:'terran',  unit:'고스트',       wep:'ghost',   hp:90, spd:190,perk:'crit', lock:{text:'한 판 레벨 14',          check:M=>M.level>=14}},
   {id:'SUN',spr:'sun_medic',    ko:'햇살',   race:'terran',  unit:'메딕',         wep:'medic',   hp:110,spd:190,perk:'regen',lock:{text:'누적 처치 4000',         check:M=>M.kills>=4000}},
   {id:'JDD',spr:'jdd_siegetank',    ko:'지두두', race:'terran',  unit:'시즈탱크',     wep:'siege',   hp:105,spd:185,perk:'dmg',  lock:{text:'누적 처치 9000',         check:M=>M.kills>=9000}},
-  {id:'SAMPLE',spr:'sample_vulture', ko:'소주양', race:'terran',  unit:'벌처',         wep:'vulture', hp:95, spd:215,perk:'xp',   lock:{text:'보스 누적 6마리 처치',    check:M=>M.bosses>=6}},
+  {id:'SAMPLE',spr:'sample_vulture', ko:'소주양', race:'terran',  unit:'벌처',         wep:'vulture', hp:95, spd:280,perk:'xp',   lock:{text:'보스 누적 6마리 처치',    check:M=>M.bosses>=6}},
   {id:'AMPLE',spr:'ample_firebat',  ko:'사테',   race:'terran',  unit:'파이어뱃',     wep:'firebat', hp:115,spd:185,perk:'dmg',  lock:{text:'누적 처치 14000',        check:M=>M.kills>=14000}},
   {id:'NANGNI',spr:'nangni_zergling', ko:'낭니',   race:'zerg',    unit:'저글링',       wep:'zergling',hp:90, spd:205,perk:'none', lock:null},
   {id:'CALM',spr:'calm_defiler',   ko:'김윤환', race:'zerg',    unit:'디파일러',     wep:'defiler', hp:95, spd:190,perk:'cdr',  lock:{text:'게임 1회 클리어',         check:M=>M.clears>=1}},
@@ -510,7 +510,7 @@ function fireBossPattern(b,dx,dy,fr){
   const patterns=stage>=3?3:(stage>=2?2:1),pat=(b.pattern||0)%patterns;b.pattern=(b.pattern||0)+1;
   if(pat===0){
     const n=10+stage*4+f*2+tier*5;
-    for(let i=0;i<n;i++)bossShot(b,base+i*TAU/n,speed,dmg,7+stage*0.5,3,'ring');
+    for(let i=0;i<n;i++)bossShot(b,base+i*TAU/n,speed,dmg,7+stage*0.5,4.6,'ring');
     return Math.max(0.82,2.0-stage*0.20-f*0.08-tier*0.10);
   }
   if(pat===1){
@@ -519,7 +519,7 @@ function fireBossPattern(b,dx,dy,fr){
       const lead=base+(w-(waves-1)/2)*0.34;
       for(let i=0;i<fan;i++){
         const a=lead+(i-(fan-1)/2)*wide;
-        bossShot(b,a,speed+70+w*45,dmg*(0.78+0.08*w),6.4+stage*0.45,2.7,'fan');
+        bossShot(b,a,speed+70+w*45,dmg*(0.78+0.08*w),6.4+stage*0.45,3.8,'fan');
       }
     }
     return Math.max(0.72,1.65-stage*0.18-f*0.06-tier*0.08);
@@ -527,9 +527,9 @@ function fireBossPattern(b,dx,dy,fr){
   const n=18+stage*5+f*2+tier*6,spin=b.ph+G.time*1.2;
   for(let i=0;i<n;i++){
     const a=spin+i*TAU/n;
-    bossShot(b,a,speed+((i%2)?95:25),dmg*0.72,5.8+stage*0.35,3.2,'spiral');
+    bossShot(b,a,speed+((i%2)?95:25),dmg*0.72,5.8+stage*0.35,4.2,'spiral');
   }
-  for(const off of [-0.36,-0.12,0.12,0.36])bossShot(b,base+off,speed+190,dmg*1.05,8.5+stage*0.4,2.1,'lance');
+  for(const off of [-0.36,-0.12,0.12,0.36])bossShot(b,base+off,speed+190,dmg*1.05,8.5+stage*0.4,3.0,'lance');
   b.ph+=0.75;
   return Math.max(0.62,1.45-stage*0.14-f*0.055-tier*0.08);
 }
@@ -620,7 +620,7 @@ function fire(id,w){
   const p=G.player,B=WEAPONS[id].base,k=WEAPONS[id].kind,countLv=wmod(w,'count'),special=wmod(w,'special'),area=weaponArea(w);
   if(k==='shot'){
     const count=B.count+Math.floor(countLv/2),pierce=B.pierce+Math.floor(special/2),dmg=weaponDamage(w,B.dmg),speed=B.speed*(1+special*0.04);
-    const tgt=nearestTarget(p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
+    const tgt=B.aim==='high'?highestTarget():nearestTarget(p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
     for(let i=0;i<count;i++){const a=a0+(i-(count-1)/2)*0.15;G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:6,dmg,pierce,hits:[],life:1.6,kind:id});}
   } else if(k==='spread'){
     const count=B.count+countLv,dmg=weaponDamage(w,B.dmg,0.12),speed=B.speed*(1+special*0.035),spread=B.spread*Math.max(0.55,1-special*0.025),tgt=nearestTarget(p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
@@ -661,10 +661,10 @@ function fire(id,w){
     G.fields.push({x:fx,y:fy,r:radius,dmg,tick,acc:0,life:dur,slow:B.slow*(1+special*0.05),col:RACES[G.race].col,fx:'psistorm',rot:rand(0,TAU)});
   } else if(k==='minion'){
     const dmg=weaponDamage(w,B.dmg,0.12),count=B.count+Math.floor(countLv*(id==='queen'?0.5:1.0)),dur=B.dur*(1+special*0.10),speed=B.speed*(1+special*0.03);
-    for(let i=0;i<count;i++){const a=rand(0,TAU);G.minions.push({x:p.x+Math.cos(a)*20,y:p.y+Math.sin(a)*20,dmg,life:dur,spd:speed,hitcd:0,tgt:null,big:id==='queen'});}
+    for(let i=0;i<count;i++){const a=rand(0,TAU);G.minions.push({x:p.x+Math.cos(a)*20,y:p.y+Math.sin(a)*20,dmg,life:dur,spd:speed,hitcd:0,tgt:null,big:id==='queen',aimHigh:B.aim==='high'});}
   } else if(k==='mine'){
     const dmg=weaponDamage(w,B.dmg,0.17),radius=B.radius*area,count=1+Math.floor(countLv/3),limit=8+Math.floor(countLv/2);
-    for(let i=0;i<count&&G.mines.length<limit;i++)G.mines.push({x:p.x+rand(-18,18),y:p.y+rand(-18,18),r:radius,dmg,arm:B.arm,trig:B.trig*area,t:0,blink:0});
+    for(let i=0;i<count&&G.mines.length<limit;i++)G.mines.push({x:p.x+rand(-18,18),y:p.y+rand(-18,18),r:radius,dmg,arm:B.arm,trig:B.trig*area,spd:B.spd||300,t:0,blink:0,tgt:null});
   } else if(k==='flame'){
     const dmg=weaponDamage(w,B.dmg,0.12),radius=B.radius*area,a=Math.atan2(p.face.y,p.face.x),arc=B.arc*(1+special*0.035);
     for(const t of G._targets){if(t.dead)continue;const dx=t.x-p.x,dy=t.y-p.y;if(dx*dx+dy*dy<(radius+t.r)**2){let ta=Math.atan2(dy,dx),da=Math.abs(((ta-a+Math.PI)%TAU)-Math.PI);if(da<arc/2)hurt(t,dmg,p.x,p.y,0);}}
@@ -707,7 +707,7 @@ function update(dt){
   if(G.banner.t>0){G.banner.t-=dt;if(G.banner.t<=0)$('banner').style.opacity='0';}
 
   // weapon cooldowns (carrier continuous)
-  G.orbAngle+=WEAPONS.carrier.base.rot*dt;
+  G.orbAngle+=WEAPONS.carrier.base.rot*(G.weapons.carrier?Math.pow(0.94,-wmod(G.weapons.carrier,'haste')):1)*dt;
   for(const id in G.weapons){if(id==='carrier')continue;const w=G.weapons[id];w.t-=dt;const cd=weaponCd(id,w);if(w.t<=0){w.t=cd;fire(id,w);}}
 
   // shots
@@ -751,7 +751,9 @@ function update(dt){
   for(const b of G.beams)b.t+=dt;G.beams=G.beams.filter(b=>b.t<0.12);
 
   // mines
-  for(const m of G.mines){m.t+=dt;m.blink+=dt;if(m.t>=m.arm){for(const t of G._targets){if(!t.dead&&t.type!=='temple'&&dist2(m.x,m.y,t.x,t.y)<m.trig*m.trig){m.boom=true;break;}}
+  for(const m of G.mines){m.t+=dt;m.blink+=dt;if(m.t>=m.arm){
+    if(!m.tgt||m.tgt.dead){m.tgt=null;let best=m.trig*m.trig;for(const t of G._targets){if(t.dead||t.type==='temple')continue;const d=dist2(m.x,m.y,t.x,t.y);if(d<best){best=d;m.tgt=t;}}}
+    if(m.tgt){const dx=m.tgt.x-m.x,dy=m.tgt.y-m.y,d=Math.hypot(dx,dy)||1;m.x+=dx/d*m.spd*dt;m.y+=dy/d*m.spd*dt;if(d<m.tgt.r+10)m.boom=true;}
     if(m.boom){for(const t of G._targets){if(!t.dead&&dist2(m.x,m.y,t.x,t.y)<(m.r+t.r)**2)hurt(t,m.dmg,m.x,m.y,200);}
       for(let i=0;i<12;i++){const a=Math.random()*TAU,s=rand(60,200);G.parts.push({x:m.x,y:m.y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:rand(.2,.45),col:'#ff9a3c',r:rand(2,4)});}G.shake=Math.max(G.shake,5);}}}
   G.mines=G.mines.filter(m=>!m.boom);
@@ -762,7 +764,7 @@ function update(dt){
   for(const pu of G.pulses)pu.t+=dt;G.pulses=G.pulses.filter(p=>p.t<p.dur);
 
   // minions
-  for(const m of G.minions){m.life-=dt;if(m.hitcd>0)m.hitcd-=dt;if(!m.tgt||m.tgt.dead)m.tgt=nearestTarget(m.x,m.y);
+  for(const m of G.minions){m.life-=dt;if(m.hitcd>0)m.hitcd-=dt;if(!m.tgt||m.tgt.dead)m.tgt=m.aimHigh?highestTarget():nearestTarget(m.x,m.y);
     if(m.tgt){const dx=m.tgt.x-m.x,dy=m.tgt.y-m.y,d=Math.hypot(dx,dy)||1;m.x+=dx/d*m.spd*dt;m.y+=dy/d*m.spd*dt;if(d<m.tgt.r+8&&m.hitcd<=0){hurt(m.tgt,m.dmg,m.x,m.y,60);m.hitcd=0.3;}}}
   G.minions=G.minions.filter(m=>m.life>0);
 
@@ -793,7 +795,7 @@ function update(dt){
   for(const g of G.gems){g.t+=dt;const dx=p.x-g.x,dy=p.y-g.y,d=Math.hypot(dx,dy);
     if(!g.latch&&d<G.pickR)g.latch=true;
     if(g.latch){const boost=g.pullBoost||1,pull=Math.max(0.75,clamp((G.pickR*1.4-d)/(G.pickR*1.4),0,1)),acc=(1550+p.spd*5.5)*boost;g.vx+=dx/(d||1)*pull*acc*dt;g.vy+=dy/(d||1)*pull*acc*dt;const mv=(980+p.spd*3.2)*boost,vm=Math.hypot(g.vx,g.vy);if(vm>mv){g.vx=g.vx/vm*mv;g.vy=g.vy/vm*mv;}}
-    g.vx*=0.86;g.vy*=0.86;g.x+=g.vx*dt;g.y+=g.vy*dt;if(d<p.r+g.r){g.got=true;gainXP(g.val);}}
+    const damp=Math.pow(0.86,dt*60);g.vx*=damp;g.vy*=damp;g.x+=g.vx*dt;g.y+=g.vy*dt;if(d<p.r+g.r){g.got=true;gainXP(g.val);}}
   G.gems=G.gems.filter(g=>!g.got);
   for(const h of G.hearts){h.t+=dt;const dx=p.x-h.x,dy=p.y-h.y,d=Math.hypot(dx,dy);if(h.latch||d<G.pickR){h.latch=true;const sp=(430+p.spd*1.9)*(h.pullBoost||1);h.x+=dx/(d||1)*sp*dt;h.y+=dy/(d||1)*sp*dt;}if(d<p.r+h.r){h.got=true;p.hp=Math.min(p.maxhp,p.hp+25);G.dmgs.push({x:p.x,y:p.y-p.r,txt:'+25',t:0,vy:-34,col:'#7ddc1f'});}}
   G.hearts=G.hearts.filter(h=>!h.got);
