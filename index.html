@@ -249,7 +249,7 @@ const WEAPONS={
   defiler :{name:'다크 스웜',    icon:'🟣',owner:'CALM',   kind:'field', base:{cd:3.2,dmg:8,radius:100,dur:3.0,tick:0.4,slow:0.5}},
   ultra   :{name:'쇄도',         icon:'🌪️',owner:'KILLER', kind:'cleave',base:{cd:0.55,dmg:11,radius:92}},
   muta    :{name:'글레이브',     icon:'🌀',owner:'ZOE',    kind:'chain', base:{cd:0.85,dmg:8,speed:560,bounces:3}},
-  hydra   :{name:'가시 산탄',    icon:'🦴',owner:'BRIGHT', kind:'spread',base:{cd:1.30,dmg:6,speed:430,count:3,spread:0.42}},
+  hydra   :{name:'가시 산탄',    icon:'🦴',owner:'BRIGHT', kind:'spread',base:{cd:1.30,dmg:6,speed:430,count:3,spread:0.42,aim:'high'}},
   queen   :{name:'브루들링',     icon:'🥚',owner:'JJI',    kind:'minion',base:{cd:3.0,dmg:11,count:1,dur:5.0,speed:210}},
   infestor:{name:'펑걸',         icon:'🍄',owner:'HM',     kind:'field', base:{cd:3.0,dmg:4,radius:96,dur:2.8,tick:0.4,slow:0.85}},
   lurker  :{name:'가시 분출',    icon:'🌵',owner:'72',     kind:'spikes',base:{cd:1.30,dmg:15,length:185,width:62}},
@@ -623,7 +623,7 @@ function fire(id,w){
     const tgt=B.aim==='high'?highestTarget():nearestTarget(p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
     for(let i=0;i<count;i++){const a=a0+(i-(count-1)/2)*0.15;G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:6,dmg,pierce,hits:[],life:1.6,kind:id});}
   } else if(k==='spread'){
-    const count=B.count+countLv,dmg=weaponDamage(w,B.dmg,0.12),speed=B.speed*(1+special*0.035),spread=B.spread*Math.max(0.55,1-special*0.025),tgt=nearestTarget(p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
+    const count=B.count+countLv,dmg=weaponDamage(w,B.dmg,0.12),speed=B.speed*(1+special*0.035),spread=B.spread*Math.max(0.55,1-special*0.025),tgt=B.aim==='high'?highestTarget():nearestTarget(p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
     for(let i=0;i<count;i++){const a=a0+(i-(count-1)/2)*spread+rand(-0.05,0.05);G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:5,dmg,pierce:Math.floor(special/4),hits:[],life:1.1,kind:'spike'});}
   } else if(k==='chain'){
     const count=1+Math.floor(countLv/3),dmg=weaponDamage(w,B.dmg,0.13),bounces=B.bounces+special,speed=B.speed*(1+special*0.025),tgt=nearestTarget(p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
