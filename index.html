@@ -235,21 +235,21 @@ const WEAPONS={
   archon  :{name:'사이오닉 노바',icon:'☄️',owner:'TYSON',  kind:'nova',  base:{cd:1.50,dmg:18,maxR:155,dur:0.4}},
   carrier :{name:'인터셉터',     icon:'🛩️',owner:'PADO',   kind:'orbit', base:{count:2,radius:80,dmg:6,rot:2.4,hitcd:0.45}},
   storm   :{name:'사이오닉 스톰',icon:'⚡',owner:'SONG',   kind:'field', base:{cd:3.0,dmg:5,radius:92,dur:2.6,tick:0.4,slow:0.4}},
-  dragoon :{name:'팬텀 디스럽터',icon:'🔵',owner:'RANG',   kind:'shot',  base:{cd:0.95,dmg:14,speed:430,count:1,pierce:2,aim:'high'}},
+  dragoon :{name:'팬텀 디스럽터',icon:'🔵',owner:'RANG',   kind:'shot',  base:{cd:0.95,dmg:20,speed:430,count:1,pierce:2,aim:'high'}},
   reaver  :{name:'스캐럽',       icon:'🪲',owner:'CHU',    kind:'scarab',base:{cd:1.40,dmg:14,speed:210,explodeR:66}},
   // terran
   marine  :{name:'사격',         icon:'🔫',owner:'500',    kind:'shot',  base:{cd:0.70,dmg:7,speed:540,count:1,pierce:0}},
-  ghost   :{name:'저격 · 락다운',icon:'🎯',owner:'CHAMCHI',kind:'snipe', base:{cd:1.60,dmg:32,pierce:1}},
-  medic   :{name:'치유의 빛',    icon:'➕',owner:'SUN',    kind:'heal',  base:{cd:1.40,heal:14,radius:120,dmg:4,gunDmg:7,speed:540,count:1,pierce:0}},
-  siege   :{name:'시즈 포격',    icon:'💥',owner:'JDD',    kind:'arty',  base:{cd:1.70,dmg:17,radius:74,delay:0.45,aim:'high'}},
+  ghost   :{name:'저격 · 락다운',icon:'🎯',owner:'CHAMCHI',kind:'snipe', base:{cd:1.60,dmg:20,pierce:1}},
+  medic   :{name:'치유의 빛',    icon:'➕',owner:'SUN',    kind:'heal',  base:{cd:1.40,heal:20,radius:120,dmg:12,gunDmg:7,speed:540,count:1,pierce:0}},
+  siege   :{name:'시즈 포격',    icon:'💥',owner:'JDD',    kind:'arty',  base:{cd:1.70,dmg:80,radius:148,delay:0.45,aim:'high'}},
   vulture :{name:'스파이더 마인',icon:'🕷️',owner:'SAMPLE', kind:'mine',  base:{cd:1.30,dmg:40,radius:128,trig:176,arm:0.4,spd:300}},
-  firebat :{name:'화염 방사',    icon:'🔥',owner:'AMPLE',  kind:'flame', base:{cd:0.22,dmg:4,radius:118,arc:0.95}},
+  firebat :{name:'화염 방사',    icon:'🔥',owner:'AMPLE',  kind:'flame', base:{cd:0.22,dmg:12,radius:118,arc:0.95}},
   // zerg
   zergling:{name:'저글링 떼',    icon:'🐛',owner:'NANGNI', kind:'minion',base:{cd:2.20,dmg:5,count:3,dur:3.5,speed:245}},
   defiler :{name:'다크 스웜',    icon:'🟣',owner:'CALM',   kind:'field', base:{cd:3.2,dmg:8,radius:100,dur:3.0,tick:0.4,slow:0.5}},
   ultra   :{name:'쇄도',         icon:'🌪️',owner:'KILLER', kind:'cleave',base:{cd:0.55,dmg:11,radius:92}},
   muta    :{name:'글레이브',     icon:'🌀',owner:'ZOE',    kind:'chain', base:{cd:0.85,dmg:8,speed:560,bounces:3}},
-  hydra   :{name:'가시 산탄',    icon:'🦴',owner:'BRIGHT', kind:'spread',base:{cd:1.30,dmg:6,speed:430,count:3,spread:0.42,aim:'high'}},
+  hydra   :{name:'가시 산탄',    icon:'🦴',owner:'BRIGHT', kind:'spread',base:{cd:1.30,dmg:14,speed:430,count:3,spread:0.42,aim:'high'}},
   queen   :{name:'브루들링',     icon:'🥚',owner:'JJI',    kind:'minion',base:{cd:3.0,dmg:11,count:1,dur:5.0,speed:210}},
   infestor:{name:'펑걸',         icon:'🍄',owner:'HM',     kind:'field', base:{cd:3.0,dmg:4,radius:96,dur:2.8,tick:0.4,slow:0.85}},
   lurker  :{name:'가시 분출',    icon:'🌵',owner:'72',     kind:'spikes',base:{cd:1.30,dmg:15,length:185,width:62}},
@@ -636,7 +636,7 @@ function fire(id,w){
     if(tgt){let a0=Math.atan2(tgt.y-p.y,tgt.x-p.x);for(let i=0;i<count;i++){const a=a0+(i-(count-1)/2)*0.12;G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*950,vy:Math.sin(a)*950,r:6,dmg,pierce,hits:[],life:1.2,kind:'snipe'});
       G.beams.push({x1:p.x,y1:p.y,x2:tgt.x+Math.cos(a)*60,y2:tgt.y+Math.sin(a)*60,t:0});}}
   } else if(k==='heal'){
-    const heal=B.heal*0.10*(1+0.12*special),radius=B.radius*area,dmg=weaponDamage(w,B.dmg,0.10);
+    const heal=B.heal+2*wmod(w,'dmg'),radius=B.radius*area,dmg=weaponDamage(w,B.dmg,0.10);
     const count=(B.count||1)+Math.floor(countLv/3),pierce=(B.pierce||0)+Math.floor(special/3),gunDmg=weaponDamage(w,B.gunDmg||7,0.12),speed=(B.speed||540)*(1+special*0.035);
     const tgt=nearestTarget(p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
     for(const a of volleyAngles(a0,count,0.18))G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:5.5,dmg:gunDmg,pierce,hits:[],life:1.35,kind:'medic'});
@@ -654,7 +654,8 @@ function fire(id,w){
     G.novas.push({x:p.x,y:p.y,t:0,dur:B.dur*(1+special*0.04),maxR:B.maxR*area,hitScale:1.05,dmg:weaponDamage(w,B.dmg,0.16),hit:[]});
   } else if(k==='siege' || k==='arty'){
     const dmg=weaponDamage(w,B.dmg,0.18),radius=B.radius*area,shots=1+Math.floor(countLv/3),delay=Math.max(0.22,B.delay*(1-special*0.025));
-    for(let i=0;i<shots;i++){const tgt=B.aim==='high'?highestTarget():artilleryTarget();if(!tgt)break;G.strikes.push({x:tgt.x+rand(-20,20),y:tgt.y+rand(-20,20),r:radius,dmg,delay,t:0});}
+    const maxR2=Math.pow((G.mapRange||2400)*0.5,2);
+    for(let i=0;i<shots;i++){let tgt;if(B.aim==='high'){tgt=null;let bh=-1;for(const t of G._targets){if(t.dead||dist2(p.x,p.y,t.x,t.y)>maxR2)continue;if(t.hp>bh){bh=t.hp;tgt=t;}}}else tgt=artilleryTarget();if(!tgt)break;G.strikes.push({x:tgt.x+rand(-20,20),y:tgt.y+rand(-20,20),r:radius,dmg,delay,t:0});}
   } else if(k==='field'){
     const dmg=weaponDamage(w,B.dmg,0.12),radius=B.radius*area,dur=B.dur*(1+special*0.12),tgt=nearestTarget(p.x,p.y),tick=Math.max(0.18,B.tick*(1-special*0.02));
     const fx=tgt?tgt.x:p.x+p.face.x*120,fy=tgt?tgt.y:p.y+p.face.y*120;
