@@ -241,7 +241,7 @@ const WEAPONS={
   marine  :{name:'사격',         icon:'🔫',owner:'500',    kind:'shot',  base:{cd:0.70,dmg:7,speed:540,count:1,pierce:0}},
   ghost   :{name:'저격 · 락다운',icon:'🎯',owner:'CHAMCHI',kind:'snipe', base:{cd:1.60,dmg:32,pierce:1}},
   medic   :{name:'치유의 빛',    icon:'➕',owner:'SUN',    kind:'heal',  base:{cd:1.40,heal:14,radius:120,dmg:4,gunDmg:7,speed:540,count:1,pierce:0}},
-  siege   :{name:'시즈 포격',    icon:'💥',owner:'JDD',    kind:'arty',  base:{cd:1.70,dmg:17,radius:74,delay:0.45}},
+  siege   :{name:'시즈 포격',    icon:'💥',owner:'JDD',    kind:'arty',  base:{cd:1.70,dmg:17,radius:74,delay:0.45,aim:'high'}},
   vulture :{name:'스파이더 마인',icon:'🕷️',owner:'SAMPLE', kind:'mine',  base:{cd:1.30,dmg:40,radius:128,trig:176,arm:0.4,spd:300}},
   firebat :{name:'화염 방사',    icon:'🔥',owner:'AMPLE',  kind:'flame', base:{cd:0.22,dmg:4,radius:118,arc:0.95}},
   // zerg
@@ -654,7 +654,7 @@ function fire(id,w){
     G.novas.push({x:p.x,y:p.y,t:0,dur:B.dur*(1+special*0.04),maxR:B.maxR*area,hitScale:1.05,dmg:weaponDamage(w,B.dmg,0.16),hit:[]});
   } else if(k==='siege' || k==='arty'){
     const dmg=weaponDamage(w,B.dmg,0.18),radius=B.radius*area,shots=1+Math.floor(countLv/3),delay=Math.max(0.22,B.delay*(1-special*0.025));
-    for(let i=0;i<shots;i++){const tgt=artilleryTarget();if(!tgt)break;G.strikes.push({x:tgt.x+rand(-20,20),y:tgt.y+rand(-20,20),r:radius,dmg,delay,t:0});}
+    for(let i=0;i<shots;i++){const tgt=B.aim==='high'?highestTarget():artilleryTarget();if(!tgt)break;G.strikes.push({x:tgt.x+rand(-20,20),y:tgt.y+rand(-20,20),r:radius,dmg,delay,t:0});}
   } else if(k==='field'){
     const dmg=weaponDamage(w,B.dmg,0.12),radius=B.radius*area,dur=B.dur*(1+special*0.12),tgt=nearestTarget(p.x,p.y),tick=Math.max(0.18,B.tick*(1-special*0.02));
     const fx=tgt?tgt.x:p.x+p.face.x*120,fy=tgt?tgt.y:p.y+p.face.y*120;
