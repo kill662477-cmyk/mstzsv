@@ -101,9 +101,10 @@ Completed after the previous checkpoint:
   - magnet pickups now draw at least 44px plus a visible cyan ring
 - Fixed magnet pickup behavior:
   - magnets now update, render, get pulled to the player, and trigger `attractAllDrops()`
-  - magnet drop chance increased to about 1.8% base, about 4% for the lucky perk
-  - magnet pity added after 140 enemy kills without a magnet
-- Added `MONSTARZ SURVIVORS 2.0` to the page title, title screen, rotate gate, and web manifest.
+  - magnet drop chance tuned down to stay rare after play feedback
+  - magnet pity added after 300 enemy kills without a magnet
+- Added `MONSTARZ SURVIVORS 2.0` to the page title, rotate gate, and web manifest.
+- Added a visible `2.0` badge directly beside the main title on the title screen.
 
 Verification passed:
 
