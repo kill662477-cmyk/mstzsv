@@ -140,9 +140,9 @@ Issue:
 
 Fix:
 
-- Added Endless-only direct combat XP on enemy kills.
-- Boosted Endless mineral XP value slightly so collected drops still matter.
-- Added delayed auto-pull for uncollected Endless minerals after 4 seconds, preserving magnet value as the instant full-screen pickup.
+- Added a small Endless-only direct combat XP trickle on enemy kills.
+- Removed the earlier delayed mineral auto-pull idea because magnet pickups should remain the dedicated full-screen collection tool.
+- Removed the earlier Endless mineral XP bonus so drop value stays consistent with normal pickup balance.
 
 Verification:
 
@@ -150,4 +150,4 @@ Verification:
 node -e "const fs=require('fs'),vm=require('vm');const html=fs.readFileSync('index.html','utf8');const scripts=[...html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/gi)].map(m=>m[1]);for(const [i,s] of scripts.entries())new vm.Script(s,{filename:'index.html#script'+i});console.log('parsed',scripts.length,'inline scripts');"
 ```
 
-- VM smoke test confirmed: Stage 4 boss death starts Endless, an Endless enemy kill increases XP, and delayed mineral auto-pull latches correctly.
+- VM smoke test confirmed: Stage 4 boss death starts Endless and an Endless enemy kill increases XP without auto-latching distant minerals.

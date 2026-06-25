@@ -371,9 +371,7 @@ const RANKING_CONFIG={
 const UNLOCKED=new Set(BASE_UNLOCKS);
 const META={...META_DEFAULT};
 const XP_MULT=1.8; // 레벨업 속도 조절: 클수록 빠름(획득 경험치 배수)
-const ENDLESS_KILL_XP_RATE=0.55;
-const ENDLESS_GEM_XP_BONUS=1.35;
-const ENDLESS_GEM_PULL_DELAY=4.0;
+const ENDLESS_KILL_XP_RATE=0.12;
 function xpRequirement(level){
   let need;
   if(level<=12){need=2+level*1.6+level*level*0.11;}
@@ -707,9 +705,7 @@ function onDeath(t){
   if(G.endless){
     G.endlessKills++;
     META.endlessBest=Math.max(META.endlessBest,G.endlessKills);
-    const endlessRamp=1+Math.min(0.45,G.endlessKills/800);
-    gemVal=baseXp*ENDLESS_GEM_XP_BONUS*endlessRamp;
-    gainXP(baseXp*ENDLESS_KILL_XP_RATE*endlessRamp);
+    gainXP(baseXp*ENDLESS_KILL_XP_RATE);
   }
   G.gems.push({x:t.x,y:t.y,r:7,val:gemVal,vx:0,vy:0,t:0,latch:false});
   if(Math.random()<0.016*G.luck)G.hearts.push({x:t.x+rand(-8,8),y:t.y+rand(-8,8),r:11,t:0,latch:false});
@@ -911,7 +907,6 @@ function update(dt){
   // gems (LATCH: once in range, always pulled)
   for(const g of G.gems){g.t+=dt;const dx=p.x-g.x,dy=p.y-g.y,d=Math.hypot(dx,dy);
     if(!g.latch&&d<G.pickR)g.latch=true;
-    if(G.endless&&!g.latch&&g.t>ENDLESS_GEM_PULL_DELAY){g.latch=true;g.pullBoost=Math.max(g.pullBoost||1,1.15);}
     if(g.latch){const boost=g.pullBoost||1,pull=Math.max(0.75,clamp((G.pickR*1.4-d)/(G.pickR*1.4),0,1)),acc=(1550+p.spd*5.5)*boost;g.vx+=dx/(d||1)*pull*acc*dt;g.vy+=dy/(d||1)*pull*acc*dt;const mv=(980+p.spd*3.2)*boost,vm=Math.hypot(g.vx,g.vy);if(vm>mv){g.vx=g.vx/vm*mv;g.vy=g.vy/vm*mv;}}
     const damp=Math.pow(0.86,dt*60);g.vx*=damp;g.vy*=damp;g.x+=g.vx*dt;g.y+=g.vy*dt;if(d<p.r+g.r){g.got=true;gainXP(g.val);}}
   G.gems=G.gems.filter(g=>!g.got);
