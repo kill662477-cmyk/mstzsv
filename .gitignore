@@ -1,1 +1,15 @@
 .claude/
+.env.local
+__pycache__/
+aether-output/
+monstarz-survivors-assets-backup/
+/patch*.py
+/fix_*.py
+/gen_*.py
+/promote_*.py
+/extract_*.py
+/test_api.py
+/temp.js
+/*_dump.txt
+/weps.txt
+/minions_search.txt

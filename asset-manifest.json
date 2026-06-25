@@ -1,0 +1,610 @@
+{
+  "version": "v20260626-011417",
+  "bucket": "calmsv-assets",
+  "prefix": "assets",
+  "generatedAt": "2026-06-25T16:14:18.907133Z",
+  "assets": {
+    "ample_firebat.png": {
+      "fileName": "ample_firebat.png",
+      "path": "assets/v20260625-224832/ample_firebat.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ample_firebat.png",
+      "bytes": 2229085,
+      "contentHash": "a28065153093d664c1b4e7251f0fb31a4bc0081b50741cf89fbabac001abc689"
+    },
+    "boss_stage1.png": {
+      "fileName": "boss_stage1.png",
+      "path": "assets/v20260625-224832/boss_stage1.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/boss_stage1.png",
+      "bytes": 1331826,
+      "contentHash": "565656527fce5b56bca390d0355a39725852726ba398df14dabc0b4de60b8437"
+    },
+    "boss_stage2.png": {
+      "fileName": "boss_stage2.png",
+      "path": "assets/v20260625-224832/boss_stage2.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/boss_stage2.png",
+      "bytes": 958783,
+      "contentHash": "72c17fd4efb0a65356f617a33d6e710e21dc9c8f6ba8e6624e1015683933f180"
+    },
+    "boss_stage3.png": {
+      "fileName": "boss_stage3.png",
+      "path": "assets/v20260625-224832/boss_stage3.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/boss_stage3.png",
+      "bytes": 1371924,
+      "contentHash": "cbd0eacc06fc8cf013ef3b0bcc1e118ad2093ea60c687f52de24a57fadb72db6"
+    },
+    "boss_stage4.png": {
+      "fileName": "boss_stage4.png",
+      "path": "assets/v20260625-224832/boss_stage4.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/boss_stage4.png",
+      "bytes": 1525123,
+      "contentHash": "1edf53effcd22492b5ca3ad4570483b8e12b8943e55a8bd1f7058710c25cf8cf"
+    },
+    "bright_hydralisk.png": {
+      "fileName": "bright_hydralisk.png",
+      "path": "assets/v20260625-224832/bright_hydralisk.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/bright_hydralisk.png",
+      "bytes": 1752844,
+      "contentHash": "b3f5ee2eac9cfde12052f6ec3cb49ee9e8c2d48259311b0e6ea4622f5ec5b446"
+    },
+    "calm_defiler.png": {
+      "fileName": "calm_defiler.png",
+      "path": "assets/v20260625-224832/calm_defiler.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/calm_defiler.png",
+      "bytes": 1815126,
+      "contentHash": "7db2819b94b52a655269e9772107ebba0e4b42b98060008cf3e49031a8bb3744"
+    },
+    "chamchi_ghost.png": {
+      "fileName": "chamchi_ghost.png",
+      "path": "assets/v20260625-224832/chamchi_ghost.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/chamchi_ghost.png",
+      "bytes": 1972581,
+      "contentHash": "663970cedbd99e90654532d3152b47ed5fa543e71b7490b0a006f9ad21fcbd46"
+    },
+    "chiri_lurker.png": {
+      "fileName": "chiri_lurker.png",
+      "path": "assets/v20260625-224832/chiri_lurker.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/chiri_lurker.png",
+      "bytes": 2427844,
+      "contentHash": "420dd8ee44f23573aa8d5955a3d549fe03e771bdf4a6c5fdcf40cc339ebae05f"
+    },
+    "chu_reaver.png": {
+      "fileName": "chu_reaver.png",
+      "path": "assets/v20260625-224832/chu_reaver.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/chu_reaver.png",
+      "bytes": 2063668,
+      "contentHash": "a61ccd613242f034f64ac39820c254d3f6bbec2990312b72715541c51fdc9b7d"
+    },
+    "enemy_brute.png": {
+      "fileName": "enemy_brute.png",
+      "path": "assets/v20260625-224832/enemy_brute.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/enemy_brute.png",
+      "bytes": 956965,
+      "contentHash": "29dc2e9eddc8c1704b3c1e174763ed1020b79a87b96a7909519839b547df3541"
+    },
+    "enemy_chimera_tank.png": {
+      "fileName": "enemy_chimera_tank.png",
+      "path": "assets/v20260625-224832/enemy_chimera_tank.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/enemy_chimera_tank.png",
+      "bytes": 1219580,
+      "contentHash": "7b215f98448fda0c083e6d86c8733a6e76589286ad670a5f38be98297028cdbc"
+    },
+    "enemy_hybrid_stalker.png": {
+      "fileName": "enemy_hybrid_stalker.png",
+      "path": "assets/v20260625-224832/enemy_hybrid_stalker.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/enemy_hybrid_stalker.png",
+      "bytes": 1732628,
+      "contentHash": "652164bdfa3c716dde714b1ea42683bd956393563d37a7ad4d119dbe976486ce"
+    },
+    "enemy_lab_drone.png": {
+      "fileName": "enemy_lab_drone.png",
+      "path": "assets/v20260625-224832/enemy_lab_drone.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/enemy_lab_drone.png",
+      "bytes": 750585,
+      "contentHash": "e3b0873a135bd929aa91044d7410218ecd5f5ea9dfb04afef21b3c20c583f3a7"
+    },
+    "enemy_runner.png": {
+      "fileName": "enemy_runner.png",
+      "path": "assets/v20260625-224832/enemy_runner.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/enemy_runner.png",
+      "bytes": 839730,
+      "contentHash": "4315a337bbf3f974ec694ee9aacab03088cb069375b08bc372ff689133e07c88"
+    },
+    "enemy_spitter.png": {
+      "fileName": "enemy_spitter.png",
+      "path": "assets/v20260625-224832/enemy_spitter.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/enemy_spitter.png",
+      "bytes": 1148107,
+      "contentHash": "28b10d7c23f7a835d44976e54272be90926e6fb1c44a0f66f87c1c0bd5b2c349"
+    },
+    "enemy_swarmling.png": {
+      "fileName": "enemy_swarmling.png",
+      "path": "assets/v20260625-224832/enemy_swarmling.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/enemy_swarmling.png",
+      "bytes": 293449,
+      "contentHash": "247ac328718c8dd410f1c48947ee2c655f1d539ea92cbd626f0bdf7df6265c0b"
+    },
+    "enemy_walker.png": {
+      "fileName": "enemy_walker.png",
+      "path": "assets/v20260625-224832/enemy_walker.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/enemy_walker.png",
+      "bytes": 506864,
+      "contentHash": "881e47e4f95b792e54a647c8c929adde46d188fbea17f77489894bf9554842ea"
+    },
+    "fx_broodling.png": {
+      "fileName": "fx_broodling.png",
+      "path": "assets/v20260625-224832/fx_broodling.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/fx_broodling.png",
+      "bytes": 1826621,
+      "contentHash": "f9d0c2984a496804bf0d47e008a9249cefd2474d38edae95ddae048d85ed9146"
+    },
+    "fx_bullet.png": {
+      "fileName": "fx_bullet.png",
+      "path": "assets/v20260625-224832/fx_bullet.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/fx_bullet.png",
+      "bytes": 491418,
+      "contentHash": "11c14f60a5141f08fb497b896a76ffa419ee9ff5ec62df5e22bda36ffddeb757"
+    },
+    "fx_dragoon.png": {
+      "fileName": "fx_dragoon.png",
+      "path": "assets/v20260626-010519/fx_dragoon.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260626-010519/fx_dragoon.png",
+      "bytes": 607926,
+      "contentHash": "bf8297bac85234e983c0eb55b59ace1abc66cb8ad552911e33fa4b56dc22e957"
+    },
+    "fx_explosion.png": {
+      "fileName": "fx_explosion.png",
+      "path": "assets/v20260625-224832/fx_explosion.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/fx_explosion.png",
+      "bytes": 1101265,
+      "contentHash": "c67b377d8d83b115a17ef0425f3cda0ee1173cea98e5aa54c91878b0385d34e2"
+    },
+    "fx_flame.png": {
+      "fileName": "fx_flame.png",
+      "path": "assets/v20260626-010519/fx_flame.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260626-010519/fx_flame.png",
+      "bytes": 467700,
+      "contentHash": "2b3aa0e4337c3ecd2d041cf1ea496597cf7131c96adc28b95e4ad81e38dc53fc"
+    },
+    "fx_glaive.png": {
+      "fileName": "fx_glaive.png",
+      "path": "assets/v20260625-224832/fx_glaive.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/fx_glaive.png",
+      "bytes": 1517250,
+      "contentHash": "762492072c5ec22c8e7502de881d8afc23fe4919930d23c5df583becfb9eaff3"
+    },
+    "fx_heal.png": {
+      "fileName": "fx_heal.png",
+      "path": "assets/v20260625-224832/fx_heal.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/fx_heal.png",
+      "bytes": 526892,
+      "contentHash": "807423fc32ea88ebd5223b99c84621f84f0aed3c2998c88ca2ffbc122213aead"
+    },
+    "fx_mine.png": {
+      "fileName": "fx_mine.png",
+      "path": "assets/v20260625-224832/fx_mine.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/fx_mine.png",
+      "bytes": 814306,
+      "contentHash": "cec2f42bd767ee93376c75fc766e081a757fa9416d81fddce20e48e3d550702e"
+    },
+    "fx_muzzle.png": {
+      "fileName": "fx_muzzle.png",
+      "path": "assets/v20260625-224832/fx_muzzle.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/fx_muzzle.png",
+      "bytes": 544150,
+      "contentHash": "1331d3e447399c020738936d3b3f8d07449bd1089aa6a4079c993c70cbb6a984"
+    },
+    "fx_nova.png": {
+      "fileName": "fx_nova.png",
+      "path": "assets/v20260625-224832/fx_nova.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/fx_nova.png",
+      "bytes": 1596588,
+      "contentHash": "9146a7bab19833b5a6066c1fe880a264b1e9fd6a697dfb2de08754d994e6a9ae"
+    },
+    "fx_psistorm.png": {
+      "fileName": "fx_psistorm.png",
+      "path": "assets/v20260625-224832/fx_psistorm.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/fx_psistorm.png",
+      "bytes": 1574404,
+      "contentHash": "673d9f781f6e7a32ad530d5638a8b357d810134dd5153436ed19cf993a95d0e6"
+    },
+    "fx_scarab.png": {
+      "fileName": "fx_scarab.png",
+      "path": "assets/v20260625-224832/fx_scarab.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/fx_scarab.png",
+      "bytes": 560165,
+      "contentHash": "d0143e049ec60e6bc5cfff19711509c25480e601882c2b8b27bbe489b5ca4ef5"
+    },
+    "fx_spikes.png": {
+      "fileName": "fx_spikes.png",
+      "path": "assets/v20260626-010519/fx_spikes.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260626-010519/fx_spikes.png",
+      "bytes": 590588,
+      "contentHash": "f1381434cec9f1d1ba69fd116a9361a57f99d5e93e52f2678ac9a18a68eb5079"
+    },
+    "fx_zergling.png": {
+      "fileName": "fx_zergling.png",
+      "path": "assets/v20260625-224832/fx_zergling.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/fx_zergling.png",
+      "bytes": 2313412,
+      "contentHash": "a46f06ea6b75d44db07dec7d63cb85f7c49b2cf19cdcdc89f75462865d78909b"
+    },
+    "hm_infestor.png": {
+      "fileName": "hm_infestor.png",
+      "path": "assets/v20260625-224832/hm_infestor.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/hm_infestor.png",
+      "bytes": 1292229,
+      "contentHash": "25f282664a32a3fd25881accbfe1bb5757c225ef405d5ac5974b71fe1858608a"
+    },
+    "jdd_siegetank.png": {
+      "fileName": "jdd_siegetank.png",
+      "path": "assets/v20260625-224832/jdd_siegetank.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/jdd_siegetank.png",
+      "bytes": 2683496,
+      "contentHash": "26f7c3c8899e630cb988224347c8758489f4347a6068fcdf4e5113ffd3a77382"
+    },
+    "jji_queen.png": {
+      "fileName": "jji_queen.png",
+      "path": "assets/v20260625-224832/jji_queen.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/jji_queen.png",
+      "bytes": 1947694,
+      "contentHash": "9c430c8c73328328e4b0965a901296fdaba3f8e78a32fc71a37511819e7ef5d0"
+    },
+    "killer_ultralisk.png": {
+      "fileName": "killer_ultralisk.png",
+      "path": "assets/v20260625-224832/killer_ultralisk.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/killer_ultralisk.png",
+      "bytes": 2740545,
+      "contentHash": "7aefe235395ec2ec81f966e04a399afa1725e4184defd63e8ff6fc52711808c3"
+    },
+    "map_stage1_ground.png": {
+      "fileName": "map_stage1_ground.png",
+      "path": "assets/v20260625-224832/map_stage1_ground.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/map_stage1_ground.png",
+      "bytes": 3734024,
+      "contentHash": "759ed4bb33eb88da6218ffc26d4b5cbeefa61819e0f777ffd655b1640bdecff5"
+    },
+    "map_stage2_ground.png": {
+      "fileName": "map_stage2_ground.png",
+      "path": "assets/v20260625-224832/map_stage2_ground.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/map_stage2_ground.png",
+      "bytes": 3510716,
+      "contentHash": "054a0625999d509da6780da75dae5d6c9bae550c0f7ec1a6e23c60a1519f7fdd"
+    },
+    "map_stage3_ground.png": {
+      "fileName": "map_stage3_ground.png",
+      "path": "assets/v20260625-224832/map_stage3_ground.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/map_stage3_ground.png",
+      "bytes": 3702278,
+      "contentHash": "18a000afe0a9846ea97a85a8dcaaf2e67ceb32aeae4361127860a0813c43aba8"
+    },
+    "map_stage4_ground.png": {
+      "fileName": "map_stage4_ground.png",
+      "path": "assets/v20260625-224832/map_stage4_ground.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/map_stage4_ground.png",
+      "bytes": 2991708,
+      "contentHash": "e5ee742a483ffc23be3a010d1556477a2454e6eff62fe86090ba36e68b6f07df"
+    },
+    "nangni_zergling.png": {
+      "fileName": "nangni_zergling.png",
+      "path": "assets/v20260625-224832/nangni_zergling.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/nangni_zergling.png",
+      "bytes": 2463910,
+      "contentHash": "0e3e5485bdad111c02031b5fb1a1effdd3bcd0bd1edcee9bc9a27d8999853bce"
+    },
+    "pado_carrier.png": {
+      "fileName": "pado_carrier.png",
+      "path": "assets/v20260625-224832/pado_carrier.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/pado_carrier.png",
+      "bytes": 1801362,
+      "contentHash": "b0d8fadb4ef712d7a03365718c9285f1d3dd7bc02c2a6330585b6f0f7cc3b841"
+    },
+    "peanut_zealot.png": {
+      "fileName": "peanut_zealot.png",
+      "path": "assets/v20260625-224832/peanut_zealot.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/peanut_zealot.png",
+      "bytes": 2059065,
+      "contentHash": "95d0cdd48ff839285e840aaaa1be5308c27a6d6d7542671e509c6b4fae473272"
+    },
+    "prop_magnet.png": {
+      "fileName": "prop_magnet.png",
+      "path": "assets/v20260625-231122/prop_magnet.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-231122/prop_magnet.png",
+      "bytes": 1410137,
+      "contentHash": "6261c9ef84c8aadc32520f3772720373b76730055bf584e1701377844b8aacd6"
+    },
+    "prop_portal.png": {
+      "fileName": "prop_portal.png",
+      "path": "assets/v20260625-224832/prop_portal.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/prop_portal.png",
+      "bytes": 1854735,
+      "contentHash": "35325001272287c429971c5470b778dc385c3a4f1a4c38b218f1fa244695b1dc"
+    },
+    "prop_temple.png": {
+      "fileName": "prop_temple.png",
+      "path": "assets/v20260625-224832/prop_temple.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/prop_temple.png",
+      "bytes": 1970442,
+      "contentHash": "df6d535eb467cfa15cbb167d7f0bdcee60b6b40328dfa3f2cba571fff51b6dd4"
+    },
+    "rang_dragoon.png": {
+      "fileName": "rang_dragoon.png",
+      "path": "assets/v20260625-224832/rang_dragoon.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/rang_dragoon.png",
+      "bytes": 1780384,
+      "contentHash": "faa6903a9e7275c8eea8cc606b1c6d82b82dd77996ecc20507dbc053891803ac"
+    },
+    "sample_vulture.png": {
+      "fileName": "sample_vulture.png",
+      "path": "assets/v20260625-224832/sample_vulture.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/sample_vulture.png",
+      "bytes": 2171818,
+      "contentHash": "c4bc1aac8bffcf736679d5a5b86883dbe4a56aea129e95efbc0ea9a33457db5f"
+    },
+    "song_hightemplar.png": {
+      "fileName": "song_hightemplar.png",
+      "path": "assets/v20260625-224832/song_hightemplar.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/song_hightemplar.png",
+      "bytes": 2032618,
+      "contentHash": "f0cd64dbd195a809903bfe0b12c4d1bcaa1718521de8e10560f6356cff2d6cec"
+    },
+    "sun_medic.png": {
+      "fileName": "sun_medic.png",
+      "path": "assets/v20260625-224832/sun_medic.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/sun_medic.png",
+      "bytes": 1895669,
+      "contentHash": "95cb1c65b4cc4865a85c665c8ca94c0b44ce23fd1266053c58013594ff70e03d"
+    },
+    "tyson_archon.png": {
+      "fileName": "tyson_archon.png",
+      "path": "assets/v20260625-224832/tyson_archon.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/tyson_archon.png",
+      "bytes": 2317300,
+      "contentHash": "71fdcce44cff808b115628a0e0e3348bb3ecb1567995b79f23c1959061672e4e"
+    },
+    "ui_card_frame_protoss.png": {
+      "fileName": "ui_card_frame_protoss.png",
+      "path": "assets/v20260625-224832/ui_card_frame_protoss.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_card_frame_protoss.png",
+      "bytes": 2352487,
+      "contentHash": "4babbdd2caef67725d0611e438932c31af0110c4827a0219c8ac447fac4500d0"
+    },
+    "ui_card_frame_terran.png": {
+      "fileName": "ui_card_frame_terran.png",
+      "path": "assets/v20260625-224832/ui_card_frame_terran.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_card_frame_terran.png",
+      "bytes": 2020777,
+      "contentHash": "7a9016c73494a85fb4145b8a38f60fdb04ab7ea4c8f6cb10f70263372c2da9eb"
+    },
+    "ui_card_frame_zerg.png": {
+      "fileName": "ui_card_frame_zerg.png",
+      "path": "assets/v20260625-224832/ui_card_frame_zerg.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_card_frame_zerg.png",
+      "bytes": 2382360,
+      "contentHash": "a1d5eb961eb5fc269e062e14b419ad15a20fb2ee7c0de2a9405fbfcc50bd7c67"
+    },
+    "ui_card_locked_overlay.png": {
+      "fileName": "ui_card_locked_overlay.png",
+      "path": "assets/v20260625-224832/ui_card_locked_overlay.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_card_locked_overlay.png",
+      "bytes": 1499460,
+      "contentHash": "b481a9eb5a284745cb788979ac9d8ca78b6a65151105aa16cc9c47f045466863"
+    },
+    "ui_weapon_icon_archon.png": {
+      "fileName": "ui_weapon_icon_archon.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_archon.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_archon.png",
+      "bytes": 1522760,
+      "contentHash": "f836ba63c676ad91997b4f1d694eccd9fcde83924f0727e36a8c384cbbfadd17"
+    },
+    "ui_weapon_icon_armor.png": {
+      "fileName": "ui_weapon_icon_armor.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_armor.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_armor.png",
+      "bytes": 1570781,
+      "contentHash": "7aee38142e191611b7015d9e6ac5c5735895b6c443358282646d01dce3c4b49c"
+    },
+    "ui_weapon_icon_attack.png": {
+      "fileName": "ui_weapon_icon_attack.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_attack.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_attack.png",
+      "bytes": 1498673,
+      "contentHash": "3faa7bed3e04874bb63a40133bed0f84eb3e7aefa472cb426077100f5851931f"
+    },
+    "ui_weapon_icon_boost.png": {
+      "fileName": "ui_weapon_icon_boost.png",
+      "path": "assets/v20260625-225520/ui_weapon_icon_boost.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-225520/ui_weapon_icon_boost.png",
+      "bytes": 1342349,
+      "contentHash": "b60384908260c356417563c2aade876ceef0843f432ecf19182f09d28ade7a48"
+    },
+    "ui_weapon_icon_carrier.png": {
+      "fileName": "ui_weapon_icon_carrier.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_carrier.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_carrier.png",
+      "bytes": 1456535,
+      "contentHash": "120fd101c7926bf540d53e8074a5e2c6ff7ae02157398eca1afdc3c0da371192"
+    },
+    "ui_weapon_icon_defiler.png": {
+      "fileName": "ui_weapon_icon_defiler.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_defiler.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_defiler.png",
+      "bytes": 1262951,
+      "contentHash": "bf4fb4789bce57d3cb2ff0581a19773f3321cf493beb792774e3dc8f082b3c69"
+    },
+    "ui_weapon_icon_dragoon.png": {
+      "fileName": "ui_weapon_icon_dragoon.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_dragoon.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_dragoon.png",
+      "bytes": 1469971,
+      "contentHash": "12870f4d237f87c07877322aff98efc7b60bc5a3efd46df6c4438e0906338c05"
+    },
+    "ui_weapon_icon_firebat.png": {
+      "fileName": "ui_weapon_icon_firebat.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_firebat.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_firebat.png",
+      "bytes": 1381586,
+      "contentHash": "af08fe7cd42742f548934494bdd5c9197c9e796c79cb6de54d5ae89617eec6ea"
+    },
+    "ui_weapon_icon_ghost.png": {
+      "fileName": "ui_weapon_icon_ghost.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_ghost.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_ghost.png",
+      "bytes": 1370081,
+      "contentHash": "de48871234040ab175d50a1cea622361774dbcc7a0ec6ec644744e5553aec0d7"
+    },
+    "ui_weapon_icon_hydra.png": {
+      "fileName": "ui_weapon_icon_hydra.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_hydra.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_hydra.png",
+      "bytes": 1520966,
+      "contentHash": "49f737ba09d624c0885f85978d2b54fed10538fe56bf55eec7379de30f9b751b"
+    },
+    "ui_weapon_icon_infestor.png": {
+      "fileName": "ui_weapon_icon_infestor.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_infestor.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_infestor.png",
+      "bytes": 1437502,
+      "contentHash": "01e3510e6206fdc5b389c222876b0690359173ed3184b4ebcc9fcb0534c38737"
+    },
+    "ui_weapon_icon_legs.png": {
+      "fileName": "ui_weapon_icon_legs.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_legs.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_legs.png",
+      "bytes": 1479650,
+      "contentHash": "6dca001ef8f4bf323dcae0b737708f434eae84341b170f2cf45f49610e98aa9c"
+    },
+    "ui_weapon_icon_lurker.png": {
+      "fileName": "ui_weapon_icon_lurker.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_lurker.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_lurker.png",
+      "bytes": 1451057,
+      "contentHash": "b40b3578e76a1cd7f7a78e418242262df8596043d246fe75fc0735b82dff5312"
+    },
+    "ui_weapon_icon_magnet.png": {
+      "fileName": "ui_weapon_icon_magnet.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_magnet.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_magnet.png",
+      "bytes": 1399471,
+      "contentHash": "5c8ff4b26f8efbf606b4a835020a2c9d50b0bdb1074e89f7187d3a166ec43686"
+    },
+    "ui_weapon_icon_marine.png": {
+      "fileName": "ui_weapon_icon_marine.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_marine.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_marine.png",
+      "bytes": 2149088,
+      "contentHash": "a30153c99dfa242db93602a472ce3f89bd4d837f2de2f20c194965567646dbc9"
+    },
+    "ui_weapon_icon_medic.png": {
+      "fileName": "ui_weapon_icon_medic.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_medic.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_medic.png",
+      "bytes": 1027335,
+      "contentHash": "12633bbc29ac330fbd22f0e662afbacd85da43724f400e207cb4c84135a1d202"
+    },
+    "ui_weapon_icon_muta.png": {
+      "fileName": "ui_weapon_icon_muta.png",
+      "path": "assets/v20260625-225243/ui_weapon_icon_muta.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-225243/ui_weapon_icon_muta.png",
+      "bytes": 1575745,
+      "contentHash": "50f3473ad01913e934c765514aece70a456fc77c10ccf2f6f9807877d09239ff"
+    },
+    "ui_weapon_icon_queen.png": {
+      "fileName": "ui_weapon_icon_queen.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_queen.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_queen.png",
+      "bytes": 1551235,
+      "contentHash": "f207a158c0a88f014ad83000c14cf59459fb9a8bb5c564cf85c4577b756509d4"
+    },
+    "ui_weapon_icon_reaver.png": {
+      "fileName": "ui_weapon_icon_reaver.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_reaver.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_reaver.png",
+      "bytes": 1491124,
+      "contentHash": "f855d0d5c9154577c284fa61bb1ffe5f83e586282b30ee835ef134eace67c0ba"
+    },
+    "ui_weapon_icon_siege.png": {
+      "fileName": "ui_weapon_icon_siege.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_siege.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_siege.png",
+      "bytes": 1090379,
+      "contentHash": "86dc8027515ca2e22e7b73e9018a00f6659a9d02b0128ad893d648120c352513"
+    },
+    "ui_weapon_icon_stim.png": {
+      "fileName": "ui_weapon_icon_stim.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_stim.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_stim.png",
+      "bytes": 1506083,
+      "contentHash": "e2badc563379496ae0f3b3695e730baebcab798057be9272b214e2f52ddbce13"
+    },
+    "ui_weapon_icon_storm.png": {
+      "fileName": "ui_weapon_icon_storm.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_storm.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_storm.png",
+      "bytes": 1523356,
+      "contentHash": "22eb4aa4267870f25ee73f4d1bcd193efce8802032c7d3a4c36f1af92c803243"
+    },
+    "ui_weapon_icon_supply.png": {
+      "fileName": "ui_weapon_icon_supply.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_supply.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_supply.png",
+      "bytes": 1432449,
+      "contentHash": "82658dc3f4ec23fb2e0ad70ff4fd9edb12811b451a0b7fdbc0f75b087ac8abae"
+    },
+    "ui_weapon_icon_ultra.png": {
+      "fileName": "ui_weapon_icon_ultra.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_ultra.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_ultra.png",
+      "bytes": 1441831,
+      "contentHash": "a54b31d2c069cfacc669139a7fe3b5975d389f7bf3d07a4bc71e61b971c02ea5"
+    },
+    "ui_weapon_icon_vulture.png": {
+      "fileName": "ui_weapon_icon_vulture.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_vulture.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_vulture.png",
+      "bytes": 1444329,
+      "contentHash": "654b238fc94b1bc520e2de40e893faad4bfbe1df80109d355a3d5a09cfd9d7ee"
+    },
+    "ui_weapon_icon_zealot.png": {
+      "fileName": "ui_weapon_icon_zealot.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_zealot.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_zealot.png",
+      "bytes": 1551394,
+      "contentHash": "5c402c467351a78e01661806466d9c6e1b6ee107f696e74101f1f5670cdeb3bb"
+    },
+    "ui_weapon_icon_zergling.png": {
+      "fileName": "ui_weapon_icon_zergling.png",
+      "path": "assets/v20260625-224832/ui_weapon_icon_zergling.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/ui_weapon_icon_zergling.png",
+      "bytes": 1477878,
+      "contentHash": "a3607d98f0e3f19eeb9d07edbefd3b5bc454ca91204178522c91a58469b8e70b"
+    },
+    "vitamin_marine.png": {
+      "fileName": "vitamin_marine.png",
+      "path": "assets/v20260625-224832/vitamin_marine.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/vitamin_marine.png",
+      "bytes": 1872299,
+      "contentHash": "b867fd368d646a4e9c80f79b26a1deedc18a62d74bff173567727cc1f5c06ced"
+    },
+    "zoe_mutalisk.png": {
+      "fileName": "zoe_mutalisk.png",
+      "path": "assets/v20260625-224832/zoe_mutalisk.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260625-224832/zoe_mutalisk.png",
+      "bytes": 2797388,
+      "contentHash": "53e134a45bb69335cd4378366ff9e78d5d305a049051d73078b59a149512c76e"
+    },
+    "prop_health.png": {
+      "fileName": "prop_health.png",
+      "path": "assets/v20260626-011417/prop_health.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260626-011417/prop_health.png",
+      "bytes": 933898,
+      "contentHash": "5fd436624f1eb075422bf2ecf93eb09c454a1cee1faa72a499a01fa10a3ffe92"
+    },
+    "prop_mineral.png": {
+      "fileName": "prop_mineral.png",
+      "path": "assets/v20260626-011417/prop_mineral.png",
+      "publicUrl": "https://rljvzultuyiudhjjfotg.supabase.co/storage/v1/object/public/calmsv-assets/assets/v20260626-011417/prop_mineral.png",
+      "bytes": 597444,
+      "contentHash": "c76210b8bb1d06823c5700492020ea972f58958cfbf1c552cb160983fb8b3d19"
+    }
+  }
+}

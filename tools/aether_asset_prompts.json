@@ -1,0 +1,479 @@
+{
+  "defaultModel": "GPT Image 1.5",
+  "defaultAspectRatio": "1:1",
+  "defaultResolution": "1K",
+  "defaultNumImages": 2,
+  "negativePrompt": "text, logo, watermark, UI frame, blurry silhouette, cropped body, gore, real person likeness, copyrighted character",
+  "globalStyle": "Create original high-quality 2D game art for a Korean web bullet-survivor game. The visual language is retro RTS-inspired sci-fi fantasy, readable at small sizes, polished, colorful, punchy, and game-ready. Use a three-quarter top-down/isometric angle unless the asset says otherwise. Do not copy any existing franchise design.",
+  "globalConstraints": "Keep the subject centered, readable, and separated from the background. No labels, no captions, no signature, no real streamer face likeness.",
+  "assets": [
+    {
+      "id": "peanut_zealot",
+      "file": "peanut_zealot.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A heroic golden psionic blade infantry warrior, agile melee stance, glowing twin energy blades, ornate armor, compact silhouette for a player character sprite."
+    },
+    {
+      "id": "tyson_archon",
+      "file": "tyson_archon.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A powerful floating psionic energy titan, bright electric aura, broad shoulders, molten blue-white core, heavy damage-dealer presence."
+    },
+    {
+      "id": "pado_carrier",
+      "file": "pado_carrier.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A majestic alien aircraft carrier unit, gold and teal hull, small drone bays, elegant floating battleship silhouette, player character sprite."
+    },
+    {
+      "id": "song_hightemplar",
+      "file": "song_hightemplar.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A robed psionic storm caster, glowing hands, ornate hooded armor, calm mystic pose, electricity gathering around the figure."
+    },
+    {
+      "id": "rang_dragoon",
+      "file": "rang_dragoon.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A four-legged armored plasma walker, rounded alien chassis, glowing cannon, sturdy but cute readable player sprite."
+    },
+    {
+      "id": "chu_reaver",
+      "file": "chu_reaver.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A heavy scarab-launching siege crawler, gold plating, bulky mechanical body, glowing ammunition chamber, slow powerful unit feel."
+    },
+    {
+      "id": "vitamin_marine",
+      "file": "vitamin_marine.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A compact armored space rifle soldier, blue-gray power armor, oversized readable rifle, energetic stance, clean heroic player sprite."
+    },
+    {
+      "id": "chamchi_ghost",
+      "file": "chamchi_ghost.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A stealth sniper operative in sleek sci-fi armor, visor glow, long rifle, dark cloak accents, precise critical-hit character."
+    },
+    {
+      "id": "sun_medic",
+      "file": "sun_medic.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A sci-fi combat medic, white and coral armor, healing projector, soft green glow, friendly support character silhouette."
+    },
+    {
+      "id": "jdd_siegetank",
+      "file": "jdd_siegetank.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A squat siege tank with a huge cannon, orange-gray armored treads, deployed artillery feel, readable top-down player unit."
+    },
+    {
+      "id": "sample_vulture",
+      "file": "sample_vulture.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A fast hover bike scout vehicle, sharp nose, twin engines, mine-layer personality, dynamic angled pose."
+    },
+    {
+      "id": "ample_firebat",
+      "file": "ample_firebat.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A heavy flamethrower infantry unit, red industrial armor, twin flame nozzles, warm glow, chunky close-range bruiser sprite."
+    },
+    {
+      "id": "nangni_zergling",
+      "file": "nangni_zergling.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A small fast alien claw creature, agile low stance, purple carapace, sharp readable silhouette, cute but dangerous."
+    },
+    {
+      "id": "calm_defiler",
+      "file": "calm_defiler.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A dark alien plague caster, hunched insectoid form, smoky violet aura, organic tendrils, sinister support caster sprite."
+    },
+    {
+      "id": "killer_ultralisk",
+      "file": "killer_ultralisk.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A massive armored alien beast with giant scythe tusks, thick carapace, heavy tank presence, powerful readable silhouette."
+    },
+    {
+      "id": "zoe_mutalisk",
+      "file": "zoe_mutalisk.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A flying alien manta creature, purple membrane wings, curved tail, agile airborne silhouette, bright game-ready highlights."
+    },
+    {
+      "id": "bright_hydralisk",
+      "file": "bright_hydralisk.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A ranged alien spine shooter, upright serpentine body, green-purple armor plates, needle spines, aggressive readable sprite."
+    },
+    {
+      "id": "jji_queen",
+      "file": "jji_queen.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A floating alien queen caster, insectoid crown, wing fins, psychic organic glow, regal support character sprite."
+    },
+    {
+      "id": "hm_infestor",
+      "file": "hm_infestor.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A burrowing alien infestor caster, bulbous organic body, toxic green sacs, tendrils, strange but readable silhouette."
+    },
+    {
+      "id": "chiri_lurker",
+      "file": "chiri_lurker.png",
+      "kind": "character",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A spiked burrow ambusher alien, low armored body, long blade spines, underground predator personality, sharp silhouette."
+    },
+    {
+      "id": "enemy_walker",
+      "file": "enemy_walker.png",
+      "kind": "enemy",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A basic hostile alien walker for early waves, red-purple cracked carapace, four squat legs, glowing cyan bite plates, simple readable silhouette, less detailed than player characters, centered full body on pure #00ff00 chroma key background."
+    },
+    {
+      "id": "enemy_runner",
+      "file": "enemy_runner.png",
+      "kind": "enemy",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A fast hostile runner creature, lean raptor-like alien body, blade forelimbs, orange speed fins, forward-leaning sprint pose, small aggressive silhouette for quick enemy waves, centered full body on pure #00ff00 chroma key background."
+    },
+    {
+      "id": "enemy_brute",
+      "file": "enemy_brute.png",
+      "kind": "enemy",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A bulky brute enemy, heavy asymmetrical armor plates, thick claws, dark violet carapace, glowing weak points, tanky threat silhouette, centered full body on pure #00ff00 chroma key background."
+    },
+    {
+      "id": "enemy_swarmling",
+      "file": "enemy_swarmling.png",
+      "kind": "enemy",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A tiny swarm creature, sharp triangular bug silhouette, high contrast neon eyes, simple claws, many-on-screen readability, low detail, centered full body on pure #00ff00 chroma key background."
+    },
+    {
+      "id": "enemy_spitter",
+      "file": "enemy_spitter.png",
+      "kind": "enemy",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "A ranged acid spitter enemy, hunched alien body, inflated glowing toxic mouth sac, side vents, green projectile theme, readable ranged threat silhouette, centered full body on pure #00ff00 chroma key background."
+    },
+    {
+      "id": "enemy_hybrid_stalker",
+      "file": "enemy_hybrid_stalker.png",
+      "kind": "enemy",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "Stage 4 hybrid laboratory stalker enemy, half biomechanical alien and half broken lab exosuit, cyan-purple energy seams, sharp surgical legs, elite mid-size threat silhouette, centered full body on pure #00ff00 chroma key background."
+    },
+    {
+      "id": "enemy_lab_drone",
+      "file": "enemy_lab_drone.png",
+      "kind": "enemy",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "Stage 4 unstable lab drone enemy, floating cracked containment pod with small claw arms, leaking purple specimen fluid and cyan lights, fast fragile threat, centered full body on pure #00ff00 chroma key background."
+    },
+    {
+      "id": "enemy_chimera_tank",
+      "file": "enemy_chimera_tank.png",
+      "kind": "enemy",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "Stage 4 chimera tank enemy, large fused alien beast in broken industrial armor, multiple shoulders, heavy lab restraint plates, magenta and cyan energy leaks, slow high-health silhouette, centered full body on pure #00ff00 chroma key background."
+    },
+    {
+      "id": "boss_stage1",
+      "file": "boss_stage1.png",
+      "kind": "boss",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "Stage 1 boss: large alien war beast, clear boss silhouette, glowing weak points, intimidating but colorful."
+    },
+    {
+      "id": "boss_stage2",
+      "file": "boss_stage2.png",
+      "kind": "boss",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "3:2",
+      "prompt": "Stage 2 boss: giant biomechanical artillery monster, long body, cannons and organic armor, stronger and more complex than stage 1."
+    },
+    {
+      "id": "boss_stage3",
+      "file": "boss_stage3.png",
+      "kind": "boss",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "3:2",
+      "prompt": "Stage 3 final boss: colossal cosmic hive tyrant, crown-like horns, multiple glowing cores, final encounter energy."
+    },
+    {
+      "id": "boss_stage4",
+      "file": "boss_stage4.png",
+      "kind": "boss",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "3:2",
+      "prompt": "Stage 4 final boss for a Korean web bullet-survivor game, hybrid laboratory monstrosity, fused alien tyrant inside broken containment armor, asymmetrical white gunmetal plating, exposed purple bio-core, cyan reactor veins, restraint cables, final boss silhouette, three-quarter top-down/isometric, centered full body on pure #00ff00 chroma key background, no text, no logo."
+    },
+    {
+      "id": "map_stage1_ground",
+      "file": "map_stage1_ground.png",
+      "kind": "map",
+      "transparent": false,
+      "fit": "cover",
+      "aspectRatio": "1:1",
+      "prompt": "Seamless tileable top-down battlefield ground texture for stage 1. Cracked sci-fi dirt, worn metal scraps embedded in the ground, sparse dry grass, faint blue mineral dust. Low visual noise so bullets and enemies remain readable. No horizon, no characters, no large central object, no text."
+    },
+    {
+      "id": "map_stage2_ground",
+      "file": "map_stage2_ground.png",
+      "kind": "map",
+      "transparent": false,
+      "fit": "cover",
+      "aspectRatio": "1:1",
+      "prompt": "Seamless tileable top-down alien infestation ground texture for stage 2. Purple organic creep, wet sinew veins, dark rocky plates, faint green toxic glow in cracks. Readable and not too busy, with no horizon, no characters, no large central object, no text."
+    },
+    {
+      "id": "map_stage3_ground",
+      "file": "map_stage3_ground.png",
+      "kind": "map",
+      "transparent": false,
+      "fit": "cover",
+      "aspectRatio": "1:1",
+      "prompt": "Seamless tileable top-down ancient alien temple ground texture for stage 3. Dark obsidian metal, gold worn inlays, violet-blue psionic cracks, angular ritual floor patterns. Readable and not too busy, no horizon, no characters, no large central object, no text."
+    },
+    {
+      "id": "map_stage4_ground",
+      "file": "map_stage4_ground.png",
+      "kind": "map",
+      "transparent": false,
+      "fit": "cover",
+      "aspectRatio": "1:1",
+      "prompt": "Seamless tileable top-down hybrid laboratory floor texture for stage 4 final area. Cold gunmetal panels, broken containment grid lines, purple and cyan hybrid energy leaks, hints of bio-organic creep under transparent lab plating, warning stripes worn down, faint glass tube reflections. High-end final-stage mood but low visual noise for gameplay readability. No horizon, no characters, no large central object, no text."
+    },
+    {
+      "id": "fx_bullet",
+      "file": "fx_bullet.png",
+      "kind": "fx",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "Small bright sci-fi bullet projectile effect, yellow-white core, short motion streak, centered effect sprite."
+    },
+    {
+      "id": "fx_dragoon",
+      "file": "fx_dragoon.png",
+      "kind": "fx",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "Clean spherical protoss-style plasma projectile orb. Bright cyan-blue core, violet electric rim, subtle golden energy arcs, compact round silhouette, readable at small size, centered single projectile, no trail."
+    },
+    {
+      "id": "fx_muzzle",
+      "file": "fx_muzzle.png",
+      "kind": "fx",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "Compact muzzle flash burst, orange-yellow star shape, crisp game effect, centered with transparent-friendly edges."
+    },
+    {
+      "id": "fx_psistorm",
+      "file": "fx_psistorm.png",
+      "kind": "fx",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "Circular psionic storm area effect, blue-violet lightning ring, magical energy swirl, top-down readable."
+    },
+    {
+      "id": "fx_explosion",
+      "file": "fx_explosion.png",
+      "kind": "fx",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "Round arcade explosion effect, orange fireball with smoke edge, centered, high contrast, no debris text."
+    },
+    {
+      "id": "fx_mine",
+      "file": "fx_mine.png",
+      "kind": "fx",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "Small sci-fi land mine prop/effect, dark metal disk with red warning glow, top-down readable."
+    },
+    {
+      "id": "fx_flame",
+      "file": "fx_flame.png",
+      "kind": "fx",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "4:3",
+      "prompt": "Wide flamethrower cone effect, bright orange flame plume, stylized arcade fire, clean edges."
+    },
+    {
+      "id": "fx_nova",
+      "file": "fx_nova.png",
+      "kind": "fx",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "Radial energy nova burst, cyan-white center, circular shockwave, polished spell effect."
+    },
+    {
+      "id": "fx_scarab",
+      "file": "fx_scarab.png",
+      "kind": "fx",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "3:2",
+      "prompt": "Small glowing scarab bomb projectile, beetle-shaped energy shell, gold highlights, readable in motion."
+    },
+    {
+      "id": "fx_glaive",
+      "file": "fx_glaive.png",
+      "kind": "fx",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "Curved glaive projectile effect, green-blue crescent blade, spinning energy trail, centered."
+    },
+    {
+      "id": "fx_spikes",
+      "file": "fx_spikes.png",
+      "kind": "fx",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "16:9",
+      "prompt": "Ground spike attack effect, jagged organic spikes erupting in a line, top-down readable, sharp silhouette."
+    },
+    {
+      "id": "fx_heal",
+      "file": "fx_heal.png",
+      "kind": "fx",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "Healing aura effect, soft green plus-shaped particles and circular glow, friendly support visual."
+    },
+    {
+      "id": "prop_temple",
+      "file": "prop_temple.png",
+      "kind": "prop",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "Ancient alien temple prop, dark stone and gold sci-fi accents, glowing doorway, top-down/isometric game object."
+    },
+    {
+      "id": "prop_mineral",
+      "file": "prop_mineral.png",
+      "kind": "prop",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "Large readable collectible mineral pickup for a top-down Korean bullet survivor game. Oversized cyan-blue crystal cluster with chunky facets, white rim highlights, small golden sparkle accents, compact icon-like silhouette, visible at tiny in-game size, centered, no text, no logo."
+    },
+    {
+      "id": "prop_health",
+      "file": "prop_health.png",
+      "kind": "prop",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "1:1",
+      "prompt": "Large readable health recovery pickup for a top-down Korean bullet survivor game. Bright sci-fi med capsule shaped like a heart-core power cell, red-pink heart glow with white medical cross energy mark, thick clean silhouette, high contrast rim light, visible at tiny in-game size, centered, no text, no logo."
+    },
+    {
+      "id": "prop_portal",
+      "file": "prop_portal.png",
+      "kind": "prop",
+      "transparent": true,
+      "fit": "contain",
+      "aspectRatio": "2:3",
+      "prompt": "Tall glowing portal prop, blue-violet oval energy gate, alien metal frame, strong readable silhouette."
+    }
+  ]
+}

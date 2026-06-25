@@ -1,6 +1,6 @@
-﻿{
-  "name": "MONSTARZ SURVIVORS",
-  "short_name": "MONSTARZ",
+{
+  "name": "MONSTARZ SURVIVORS 2.0",
+  "short_name": "MONSTARZ 2.0",
   "start_url": "./index.html",
   "scope": "./",
   "display": "fullscreen",
