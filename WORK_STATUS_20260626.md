@@ -1,12 +1,15 @@
 # CALMSV Current Work Status
 
-Last updated: 2026-06-26 00:55 KST
+Last updated: 2026-06-26 08:32 KST
 
 ## Context
 
 Antigravity credits expired while it was fixing the Lurker weapon direction. Codex continued from the current dirty working tree without reverting Antigravity changes.
 
-The repo is still uncommitted. Do not commit unless the user explicitly approves.
+Latest pushed baseline before this note:
+
+- `aaed599 feat: MONSTARZ SURVIVORS 2.0 대형 패치`
+- `1f9801d fix: 타이틀 2.0 배지와 자석 드랍 보정 조정`
 
 ## Current Verified State
 
@@ -126,3 +129,25 @@ Remaining after push:
 - Full manual gameplay balance pass for Stages 1-4 and Endless.
 - Manual unlocked-character playtest for Lurker (`72`) and Dragoon (`RANG`) because the in-app browser test scope cannot mutate `localStorage`.
 - Optional next improvement: dedicated Stage 4 BGM instead of reusing Stage 3 BGM.
+
+## Endless Level-Up Hotfix
+
+Last updated: 2026-06-26 08:32 KST
+
+Issue:
+
+- After clearing the Stage 4 boss and entering Endless, level progression could feel stalled because XP depended almost entirely on mineral pickup while Endless enemy HP and screen pressure rose sharply.
+
+Fix:
+
+- Added Endless-only direct combat XP on enemy kills.
+- Boosted Endless mineral XP value slightly so collected drops still matter.
+- Added delayed auto-pull for uncollected Endless minerals after 4 seconds, preserving magnet value as the instant full-screen pickup.
+
+Verification:
+
+```powershell
+node -e "const fs=require('fs'),vm=require('vm');const html=fs.readFileSync('index.html','utf8');const scripts=[...html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/gi)].map(m=>m[1]);for(const [i,s] of scripts.entries())new vm.Script(s,{filename:'index.html#script'+i});console.log('parsed',scripts.length,'inline scripts');"
+```
+
+- VM smoke test confirmed: Stage 4 boss death starts Endless, an Endless enemy kill increases XP, and delayed mineral auto-pull latches correctly.
