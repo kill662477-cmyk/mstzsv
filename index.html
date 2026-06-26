@@ -926,7 +926,15 @@ function xpGainScale(){
   const frenzyBoost=1+(G.frenzyLv||0)*0.025+(G.endless?0.10:0);
   return levelBoost*stageBoost*frenzyBoost;
 }
-function gainXP(v){G.xp+=v*G.xpMul*xpGainScale()*XP_MULT;while(G.xp>=G.xpNext){G.xp-=G.xpNext;G.level++;G.xpNext=xpRequirement(G.level);openLevelUp();}}
+function gainXP(v){
+  const raw=Number(v);
+  if(!Number.isFinite(raw)||raw<=0)return;
+  const gained=raw*G.xpMul*xpGainScale()*XP_MULT;
+  if(!Number.isFinite(gained)||gained<=0)return;
+  G.xp+=gained;
+  while(G.xp>=G.xpNext){G.xp-=G.xpNext;G.level++;G.xpNext=xpRequirement(G.level);openLevelUp();}
+  if(typeof syncHUD==='function'&&G&&!G.over)syncHUD();
+}
 
 /* ---------- render ---------- */
 

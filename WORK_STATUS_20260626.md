@@ -1,6 +1,6 @@
 # CALMSV Current Work Status
 
-Last updated: 2026-06-26 08:32 KST
+Last updated: 2026-06-26 11:04 KST
 
 ## Context
 
@@ -151,3 +151,24 @@ node -e "const fs=require('fs'),vm=require('vm');const html=fs.readFileSync('ind
 ```
 
 - VM smoke test confirmed: Stage 4 boss death starts Endless and an Endless enemy kill increases XP without auto-latching distant minerals.
+
+## Stage Boss XP Audit
+
+Last updated: 2026-06-26 11:04 KST
+
+Report:
+
+- A tester reported that minerals did not appear to increase XP after the Stage 3 boss appeared.
+
+Findings:
+
+- VM phase tests confirmed minerals increase XP during Stage 1, 2, 3, and 4 boss phases.
+- Stage 3 boss-phase enemy drops also increase XP.
+- Invalid XP inputs are now ignored defensively so a malformed drop cannot poison the XP bar.
+- `gainXP()` now syncs the HUD immediately after applying XP, so boss/level-up/phase transitions cannot leave the XP bar visually stale until the end of the update tick.
+
+Verification:
+
+- `index.html` parses successfully with Node `vm.Script`.
+- Supabase asset dry-run reports `0` pending uploads.
+- VM smoke test confirmed: Stage 3 boss phase mineral pickup changes both `G.xp` and `#xpfill` width.
