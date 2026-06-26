@@ -1,6 +1,6 @@
 # CALMSV Current Work Status
 
-Last updated: 2026-06-26 11:10 KST
+Last updated: 2026-06-26 12:13 KST
 
 ## Context
 
@@ -194,3 +194,27 @@ Verification:
 - VM smoke test confirmed Stage 1 and Stage 3 spawn only `spit` as the ranged regular enemy.
 - VM smoke test confirmed Stage 4 spawns both `spit` and `drone` ranged regular enemies.
 - VM smoke test confirmed `spit` projectiles are created and damage the player shield/HP pipeline.
+
+## Zergling Swarm Balance Nerf
+
+Last updated: 2026-06-26 12:13 KST
+
+Issue:
+
+- `NANGNI`'s `저글링 떼` scaled too hard because count, duration, damage, speed, and cooldown upgrades multiplied together.
+
+Fix:
+
+- Applied the nerf only to `zergling` minions, leaving `queen`/`브루들링` behavior intact.
+- Reduced zergling damage upgrade scaling from `0.12` to `0.08`.
+- Reduced zergling count upgrade scaling from `+1.0` per count mod to `+0.55` per count mod.
+- Reduced zergling duration upgrade scaling from `+10%` to `+4.5%` per special mod.
+- Reduced zergling speed upgrade scaling from `+3%` to `+1.5%` per special mod.
+- Increased zergling minion hit interval from `0.30s` to `0.42s`.
+- Added a zergling-only active minion cap: `min(34, 14 + countLv * 2)`.
+
+Verification:
+
+- VM smoke test confirmed base zergling summon still creates 3 minions.
+- VM smoke test confirmed heavily upgraded repeated zergling casts cap at 34 active minions.
+- VM smoke test confirmed queen minions still use the existing 0.30s hit interval and uncapped summon behavior.

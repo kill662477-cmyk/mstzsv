@@ -791,8 +791,10 @@ function fire(id,w){
     const fx=tgt?tgt.x:p.x+p.face.x*120,fy=tgt?tgt.y:p.y+p.face.y*120;
     G.fields.push({x:fx,y:fy,r:radius,dmg,tick,acc:0,life:dur,slow:B.slow*(1+special*0.05),col:RACES[G.race].col,fx:'psistorm',rot:rand(0,TAU)});
   } else if(k==='minion'){
-    const dmg=weaponDamage(w,B.dmg,0.12),count=B.count+Math.floor(countLv*(id==='queen'?0.5:1.0)),dur=B.dur*(1+special*0.10),speed=B.speed*(1+special*0.03);
-    for(let i=0;i<count;i++){const a=rand(0,TAU);G.minions.push({x:p.x+Math.cos(a)*20,y:p.y+Math.sin(a)*20,dmg,life:dur,spd:speed,hitcd:0,tgt:null,big:id==='queen',aimHigh:B.aim==='high'});}
+    const zergling=id==='zergling';
+    const dmg=weaponDamage(w,B.dmg,zergling?0.08:0.12),count=B.count+Math.floor(countLv*(id==='queen'?0.5:(zergling?0.55:1.0))),dur=B.dur*(1+special*(zergling?0.045:0.10)),speed=B.speed*(1+special*(zergling?0.015:0.03));
+    const active=G.minions.filter(m=>m.source===id).length,limit=zergling?Math.min(34,14+countLv*2):999,spawnCount=Math.max(0,Math.min(count,limit-active));
+    for(let i=0;i<spawnCount;i++){const a=rand(0,TAU);G.minions.push({x:p.x+Math.cos(a)*20,y:p.y+Math.sin(a)*20,dmg,life:dur,spd:speed,hitcd:0,hitRate:zergling?0.42:0.3,tgt:null,big:id==='queen',aimHigh:B.aim==='high',source:id});}
   } else if(k==='mine'){
     const dmg=weaponDamage(w,B.dmg,0.17),radius=B.radius*area,count=1+Math.floor(countLv/3),limit=8+Math.floor(countLv/2);
     for(let i=0;i<count&&G.mines.length<limit;i++)G.mines.push({x:p.x+rand(-18,18),y:p.y+rand(-18,18),r:radius,dmg,arm:B.arm,trig:B.trig*area,spd:B.spd||300,t:0,blink:0,tgt:null});
@@ -896,7 +898,7 @@ function update(dt){
 
   // minions
   for(const m of G.minions){m.life-=dt;if(m.hitcd>0)m.hitcd-=dt;if(!m.tgt||m.tgt.dead)m.tgt=m.aimHigh?highestTarget():nearestTarget(m.x,m.y);
-    if(m.tgt){const dx=m.tgt.x-m.x,dy=m.tgt.y-m.y,d=Math.hypot(dx,dy)||1;m.x+=dx/d*m.spd*dt;m.y+=dy/d*m.spd*dt;if(d<m.tgt.r+8&&m.hitcd<=0){hurt(m.tgt,m.dmg,m.x,m.y,60);m.hitcd=0.3;}}}
+    if(m.tgt){const dx=m.tgt.x-m.x,dy=m.tgt.y-m.y,d=Math.hypot(dx,dy)||1;m.x+=dx/d*m.spd*dt;m.y+=dy/d*m.spd*dt;if(d<m.tgt.r+8&&m.hitcd<=0){hurt(m.tgt,m.dmg,m.x,m.y,60);m.hitcd=m.hitRate||0.3;}}}
   G.minions=G.minions.filter(m=>m.life>0);
 
   // boss
