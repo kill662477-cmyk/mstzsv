@@ -263,24 +263,24 @@ const WEAPONS={
   zealot  :{name:'차지 베기',    icon:`<img src='${ASSET_BASE}ui_weapon_icon_zealot.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'PEANUT', kind:'arc',   base:{cd:1.00,dmg:13,radius:98,arc:2.5,knock:240}},
   archon  :{name:'사이오닉 노바',icon:`<img src='${ASSET_BASE}ui_weapon_icon_archon.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'TYSON',  kind:'nova',  base:{cd:1.50,dmg:12,maxR:155,dur:0.4}},
   carrier :{name:'인터셉터',icon:`<img src='${ASSET_BASE}ui_weapon_icon_carrier.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'PADO',   kind:'orbit', base:{count:2,radius:80,dmg:6,rot:2.4,hitcd:0.45}},
-  storm   :{name:'사이오닉 스톰',icon:`<img src='${ASSET_BASE}ui_weapon_icon_storm.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'SONG',   kind:'field', base:{cd:3.0,dmg:5,radius:92,dur:2.6,tick:0.4,slow:0.4}},
-  dragoon :{name:'팬텀 디스럽터',icon:`<img src='${ASSET_BASE}ui_weapon_icon_dragoon.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'RANG',   kind:'shot',  base:{cd:0.95,dmg:20,speed:430,count:1,pierce:2,aim:'high'}},
-  reaver  :{name:'스캐럽',icon:`<img src='${ASSET_BASE}ui_weapon_icon_reaver.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'CHU',    kind:'scarab',base:{cd:1.40,dmg:14,speed:210,explodeR:66}},
+  storm   :{name:'사이오닉 스톰',icon:`<img src='${ASSET_BASE}ui_weapon_icon_storm.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'SONG',   kind:'field', base:{cd:3.0,dmg:5,radius:92,dur:2.6,tick:0.4,slow:0.4,range:760}},
+  dragoon :{name:'팬텀 디스럽터',icon:`<img src='${ASSET_BASE}ui_weapon_icon_dragoon.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'RANG',   kind:'shot',  base:{cd:0.95,dmg:20,speed:430,count:1,pierce:2,range:760,aim:'high'}},
+  reaver  :{name:'스캐럽',icon:`<img src='${ASSET_BASE}ui_weapon_icon_reaver.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'CHU',    kind:'scarab',base:{cd:1.40,dmg:14,speed:210,explodeR:66,range:760}},
   // terran
-  marine  :{name:'사격',         icon:`<img src='${ASSET_BASE}ui_weapon_icon_marine.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'500',    kind:'shot',  base:{cd:0.70,dmg:7,speed:540,count:1,pierce:0}},
-  ghost   :{name:'저격 · 락다운',icon:`<img src='${ASSET_BASE}ui_weapon_icon_ghost.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'CHAMCHI',kind:'snipe', base:{cd:1.60,dmg:20,pierce:1}},
-  medic   :{name:'치유의 빛',icon:`<img src='${ASSET_BASE}ui_weapon_icon_medic.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'SUN',    kind:'heal',  base:{cd:1.40,heal:4,radius:120,dmg:12,gunDmg:7,speed:540,count:1,pierce:0}},
-  siege   :{name:'시즈 포격',icon:`<img src='${ASSET_BASE}ui_weapon_icon_siege.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'JDD',    kind:'arty',  base:{cd:1.70,dmg:55,radius:148,delay:0.45,aim:'high'}},
+  marine  :{name:'사격',         icon:`<img src='${ASSET_BASE}ui_weapon_icon_marine.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'500',    kind:'shot',  base:{cd:0.70,dmg:7,speed:540,count:1,pierce:0,range:820}},
+  ghost   :{name:'저격 · 락다운',icon:`<img src='${ASSET_BASE}ui_weapon_icon_ghost.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'CHAMCHI',kind:'snipe', base:{cd:1.60,dmg:20,pierce:1,range:1020}},
+  medic   :{name:'치유의 빛',icon:`<img src='${ASSET_BASE}ui_weapon_icon_medic.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'SUN',    kind:'heal',  base:{cd:1.40,heal:4,radius:120,dmg:12,gunDmg:7,speed:540,count:1,pierce:0,range:760}},
+  siege   :{name:'시즈 포격',icon:`<img src='${ASSET_BASE}ui_weapon_icon_siege.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'JDD',    kind:'arty',  base:{cd:1.70,dmg:55,radius:148,delay:0.45,range:780,aim:'high'}},
   vulture :{name:'스파이더 마인',icon:`<img src='${ASSET_BASE}ui_weapon_icon_vulture.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'SAMPLE', kind:'mine',  base:{cd:1.30,dmg:40,radius:128,trig:176,arm:0.4,spd:300}},
   firebat :{name:'화염 방사',icon:`<img src='${ASSET_BASE}ui_weapon_icon_firebat.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'AMPLE',  kind:'flame', base:{cd:0.22,dmg:12,radius:177,arc:1.425}},
   // zerg
-  zergling:{name:'저글링 떼',icon:`<img src='${ASSET_BASE}ui_weapon_icon_zergling.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'NANGNI', kind:'minion',base:{cd:2.20,dmg:5,count:3,dur:3.5,speed:245}},
-  defiler :{name:'다크 스웜',icon:`<img src='${ASSET_BASE}ui_weapon_icon_defiler.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'CALM',   kind:'field', base:{cd:3.2,dmg:8,radius:100,dur:3.0,tick:0.4,slow:0.5}},
+  zergling:{name:'저글링 떼',icon:`<img src='${ASSET_BASE}ui_weapon_icon_zergling.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'NANGNI', kind:'minion',base:{cd:2.20,dmg:5,count:3,dur:3.5,speed:245,range:760}},
+  defiler :{name:'다크 스웜',icon:`<img src='${ASSET_BASE}ui_weapon_icon_defiler.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'CALM',   kind:'field', base:{cd:3.2,dmg:8,radius:100,dur:3.0,tick:0.4,slow:0.5,range:740}},
   ultra   :{name:'쇄도',icon:`<img src='${ASSET_BASE}ui_weapon_icon_ultra.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'KILLER', kind:'cleave',base:{cd:0.55,dmg:11,radius:92}},
-  muta    :{name:'글레이브',icon:`<img src='${ASSET_BASE}ui_weapon_icon_muta.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'ZOE',    kind:'chain', base:{cd:0.85,dmg:8,speed:560,bounces:3}},
-  hydra   :{name:'가시 산탄',icon:`<img src='${ASSET_BASE}ui_weapon_icon_hydra.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'BRIGHT', kind:'spread',base:{cd:1.30,dmg:14,speed:430,count:3,spread:0.42,aim:'high'}},
-  queen   :{name:'브루들링',icon:`<img src='${ASSET_BASE}ui_weapon_icon_queen.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'JJI',    kind:'minion',base:{cd:3.0,dmg:11,count:1,dur:5.0,speed:210}},
-  infestor:{name:'펑걸',icon:`<img src='${ASSET_BASE}ui_weapon_icon_infestor.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'HM',     kind:'field', base:{cd:3.0,dmg:4,radius:96,dur:2.8,tick:0.4,slow:0.85}},
+  muta    :{name:'글레이브',icon:`<img src='${ASSET_BASE}ui_weapon_icon_muta.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'ZOE',    kind:'chain', base:{cd:0.85,dmg:8,speed:560,bounces:3,range:860}},
+  hydra   :{name:'가시 산탄',icon:`<img src='${ASSET_BASE}ui_weapon_icon_hydra.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'BRIGHT', kind:'spread',base:{cd:1.30,dmg:14,speed:430,count:3,spread:0.42,range:680,aim:'high'}},
+  queen   :{name:'브루들링',icon:`<img src='${ASSET_BASE}ui_weapon_icon_queen.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'JJI',    kind:'minion',base:{cd:3.0,dmg:11,count:1,dur:5.0,speed:210,range:760}},
+  infestor:{name:'펑걸',icon:`<img src='${ASSET_BASE}ui_weapon_icon_infestor.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'HM',     kind:'field', base:{cd:3.0,dmg:4,radius:96,dur:2.8,tick:0.4,slow:0.85,range:740}},
   lurker  :{name:'가시 분출',icon:`<img src='${ASSET_BASE}ui_weapon_icon_lurker.png' style='width:24px;height:24px;vertical-align:-4px'>`,owner:'72',     kind:'spikes',base:{cd:1.30,dmg:15,length:247,width:83}},
 };
 const WEAPON_POOL=Object.keys(WEAPONS);
@@ -681,16 +681,18 @@ function spawnEnemy(){
     hp:d.hp*hpS,maxhp:d.hp*hpS,spd:d.spd*spdS,dmg:d.dmg*dmgS,xp:d.xp,col:d.col,hit:0,slow:0,type:'enemy',ekind:EKMAP[_en],ph:Math.random()*TAU,kb:{x:0,y:0},
     ranged:rs?rs.kind:null,shootT:rs?rand(rs.cd*0.35,rs.cd*1.05):0});
 }
-function nearestTarget(x,y,exclude){let best=null,bd=1e18;
+function inTargetRange(t,range,rx,ry){return !range||dist2(rx,ry,t.x,t.y)<=range*range;}
+function nearestTarget(x,y,exclude,range,rx=x,ry=y){let best=null,bd=1e18;
   for(const t of G._targets){if(t.dead)continue;if(exclude&&exclude.includes(t))continue;
+    if(!inTargetRange(t,range,rx,ry))continue;
     const d=dist2(x,y,t.x,t.y);if(d<bd){bd=d;best=t;}}return best;}
 function nearestEnemy(x,y){let best=null,bd=1e18;
   for(const e of G.enemies){if(e.dead)continue;const d=dist2(x,y,e.x,e.y);if(d<bd){bd=d;best=e;}}
   if(!best&&G.boss&&!G.boss.dead)return G.boss;return best;}
-function highestTarget(){let best=null,bh=-1;for(const t of G._targets){if(t.dead)continue;if(t.hp>bh){bh=t.hp;best=t;}}return best;}
-function artilleryTarget(){const e=G.enemies.filter(x=>!x.dead);
+function highestTarget(range,rx=G.player.x,ry=G.player.y){let best=null,bh=-1;for(const t of G._targets){if(t.dead)continue;if(!inTargetRange(t,range,rx,ry))continue;if(t.hp>bh){bh=t.hp;best=t;}}return best;}
+function artilleryTarget(range){const e=G.enemies.filter(x=>!x.dead&&inTargetRange(x,range,G.player.x,G.player.y));
   if(e.length){e.sort((a,b)=>dist2(G.player.x,G.player.y,b.x,b.y)-dist2(G.player.x,G.player.y,a.x,a.y));return e[Math.min(e.length-1,Math.floor(rand(0,4)))];}
-  return nearestTarget(G.player.x,G.player.y);}
+  return nearestTarget(G.player.x,G.player.y,null,range,G.player.x,G.player.y);}
 
 /* ---------- damage ---------- */
 function wdmg(extra){return extra*G.dmgMul;}
@@ -750,26 +752,31 @@ function fire(id,w){
   const p=G.player,B=WEAPONS[id].base,k=WEAPONS[id].kind,countLv=wmod(w,'count'),special=wmod(w,'special'),area=weaponArea(w);
   if(k==='shot'){
     const count=B.count+Math.floor(countLv/2),pierce=B.pierce+Math.floor(special/2),dmg=weaponDamage(w,B.dmg),speed=B.speed*(1+special*0.04);
-    const tgt=B.aim==='high'?highestTarget():nearestTarget(p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
-    for(let i=0;i<count;i++){const a=a0+(i-(count-1)/2)*0.15;G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:6,dmg,pierce,hits:[],life:1.6,kind:id});}
+    const tgt=B.aim==='high'?highestTarget(B.range,p.x,p.y):nearestTarget(p.x,p.y,null,B.range,p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
+    const life=B.range?B.range/speed:1.6;
+    for(let i=0;i<count;i++){const a=a0+(i-(count-1)/2)*0.15;G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:6,dmg,pierce,hits:[],life,kind:id});}
   } else if(k==='spread'){
-    const count=B.count+countLv,dmg=weaponDamage(w,B.dmg,0.12),speed=B.speed*(1+special*0.035),spread=B.spread*Math.max(0.55,1-special*0.025),tgt=B.aim==='high'?highestTarget():nearestTarget(p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
-    for(let i=0;i<count;i++){const a=a0+(i-(count-1)/2)*spread+rand(-0.05,0.05);G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:5,dmg,pierce:Math.floor(special/4),hits:[],life:1.1,kind:'spike'});}
+    const count=B.count+countLv,dmg=weaponDamage(w,B.dmg,0.12),speed=B.speed*(1+special*0.035),spread=B.spread*Math.max(0.55,1-special*0.025),tgt=B.aim==='high'?highestTarget(B.range,p.x,p.y):nearestTarget(p.x,p.y,null,B.range,p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
+    const life=B.range?B.range/speed:1.1;
+    for(let i=0;i<count;i++){const a=a0+(i-(count-1)/2)*spread+rand(-0.05,0.05);G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:5,dmg,pierce:Math.floor(special/4),hits:[],life,kind:'spike'});}
   } else if(k==='chain'){
-    const count=1+Math.floor(countLv/3),dmg=weaponDamage(w,B.dmg,0.13),bounces=B.bounces+special,speed=B.speed*(1+special*0.025),tgt=nearestTarget(p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
-    for(let i=0;i<count;i++){const a=a0+(i-(count-1)/2)*0.22;G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:7,dmg,bounces,hits:[],life:2.2,kind:'chain'});}
+    const count=1+Math.floor(countLv/3),dmg=weaponDamage(w,B.dmg,0.13),bounces=B.bounces+special,speed=B.speed*(1+special*0.025),tgt=nearestTarget(p.x,p.y,null,B.range,p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
+    const life=B.range?B.range/speed:2.2;
+    for(let i=0;i<count;i++){const a=a0+(i-(count-1)/2)*0.22;G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:7,dmg,bounces,hits:[],life,kind:'chain'});}
   } else if(k==='scarab'){
-    const count=1+Math.floor(countLv/4),dmg=weaponDamage(w,B.dmg,0.16),speed=B.speed*(1+special*0.03),explodeR=B.explodeR*area,tgt=nearestTarget(p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
-    for(let i=0;i<count;i++){const a=a0+(i-(count-1)/2)*0.24;G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:8,dmg,explodeR,hits:[],life:3.0,kind:'scarab'});}
+    const count=1+Math.floor(countLv/4),dmg=weaponDamage(w,B.dmg,0.16),speed=B.speed*(1+special*0.03),explodeR=B.explodeR*area,tgt=nearestTarget(p.x,p.y,null,B.range,p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
+    const life=B.range?B.range/speed:3.0;
+    for(let i=0;i<count;i++){const a=a0+(i-(count-1)/2)*0.24;G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:8,dmg,explodeR,hits:[],life,kind:'scarab'});}
   } else if(k==='snipe'){
-    const count=1+Math.floor(countLv/4),dmg=weaponDamage(w,B.dmg,0.18),pierce=B.pierce+Math.floor(special/2),tgt=highestTarget();
-    if(tgt){let a0=Math.atan2(tgt.y-p.y,tgt.x-p.x);for(let i=0;i<count;i++){const a=a0+(i-(count-1)/2)*0.12;G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*950,vy:Math.sin(a)*950,r:6,dmg,pierce,hits:[],life:1.2,kind:'snipe'});
+    const count=1+Math.floor(countLv/4),dmg=weaponDamage(w,B.dmg,0.18),pierce=B.pierce+Math.floor(special/2),tgt=highestTarget(B.range,p.x,p.y);
+    if(tgt){let a0=Math.atan2(tgt.y-p.y,tgt.x-p.x),speed=950,life=B.range?B.range/speed:1.2;for(let i=0;i<count;i++){const a=a0+(i-(count-1)/2)*0.12;G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:6,dmg,pierce,hits:[],life,kind:'snipe'});
       G.beams.push({x1:p.x,y1:p.y,x2:tgt.x+Math.cos(a)*60,y2:tgt.y+Math.sin(a)*60,t:0});}}
   } else if(k==='heal'){
     const heal=B.heal+2*wmod(w,'dmg'),radius=B.radius*area,dmg=weaponDamage(w,B.dmg,0.10);
     const count=(B.count||1)+Math.floor(countLv/3),pierce=(B.pierce||0)+Math.floor(special/3),gunDmg=weaponDamage(w,B.gunDmg||7,0.12),speed=(B.speed||540)*(1+special*0.035);
-    const tgt=nearestTarget(p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
-    for(const a of volleyAngles(a0,count,0.18))G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:5.5,dmg:gunDmg,pierce,hits:[],life:1.35,kind:'medic'});
+    const tgt=nearestTarget(p.x,p.y,null,B.range,p.x,p.y);let a0=tgt?Math.atan2(tgt.y-p.y,tgt.x-p.x):Math.atan2(p.face.y,p.face.x);
+    const life=B.range?B.range/speed:1.35;
+    for(const a of volleyAngles(a0,count,0.18))G.shots.push({x:p.x,y:p.y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,r:5.5,dmg:gunDmg,pierce,hits:[],life,kind:'medic'});
     p.hp=Math.min(p.maxhp,p.hp+heal);G.dmgs.push({x:p.x,y:p.y-p.r,txt:'+'+Math.round(heal),t:0,vy:-34,col:'#7ddc1f'});
     for(const t of G._targets){if(!t.dead&&t.type==='enemy'&&dist2(p.x,p.y,t.x,t.y)<(radius+t.r)**2)hurt(t,dmg,p.x,p.y,0);}
     G.pulses.push({t:0,dur:0.3,r:radius,col:'#7ddc1f'});
@@ -784,17 +791,17 @@ function fire(id,w){
     G.novas.push({x:p.x,y:p.y,t:0,dur:B.dur*(1+special*0.04),maxR:B.maxR*area,hitScale:1.05,dmg:weaponDamage(w,B.dmg,0.16),hit:[]});
   } else if(k==='siege' || k==='arty'){
     const dmg=weaponDamage(w,B.dmg,0.18),radius=B.radius*area,shots=1+Math.floor(countLv/3),delay=Math.max(0.22,B.delay*(1-special*0.025));
-    const maxR2=Math.pow((G.mapRange||2400)*0.5,2);
-    for(let i=0;i<shots;i++){let tgt;if(B.aim==='high'){tgt=null;let bh=-1;for(const t of G._targets){if(t.dead||dist2(p.x,p.y,t.x,t.y)>maxR2)continue;if(t.hp>bh){bh=t.hp;tgt=t;}}}else tgt=artilleryTarget();if(!tgt)break;G.strikes.push({x:tgt.x+rand(-20,20),y:tgt.y+rand(-20,20),r:radius,dmg,delay,t:0});}
+    const maxR2=Math.pow(B.range||((G.mapRange||2400)*0.5),2);
+    for(let i=0;i<shots;i++){let tgt;if(B.aim==='high'){tgt=null;let bh=-1;for(const t of G._targets){if(t.dead||dist2(p.x,p.y,t.x,t.y)>maxR2)continue;if(t.hp>bh){bh=t.hp;tgt=t;}}}else tgt=artilleryTarget(B.range);if(!tgt)break;G.strikes.push({x:tgt.x+rand(-20,20),y:tgt.y+rand(-20,20),r:radius,dmg,delay,t:0});}
   } else if(k==='field'){
-    const dmg=weaponDamage(w,B.dmg,0.12),radius=B.radius*area,dur=B.dur*(1+special*0.12),tgt=nearestTarget(p.x,p.y),tick=Math.max(0.18,B.tick*(1-special*0.02));
+    const dmg=weaponDamage(w,B.dmg,0.12),radius=B.radius*area,dur=B.dur*(1+special*0.12),tgt=nearestTarget(p.x,p.y,null,B.range,p.x,p.y),tick=Math.max(0.18,B.tick*(1-special*0.02));
     const fx=tgt?tgt.x:p.x+p.face.x*120,fy=tgt?tgt.y:p.y+p.face.y*120;
     G.fields.push({x:fx,y:fy,r:radius,dmg,tick,acc:0,life:dur,slow:B.slow*(1+special*0.05),col:RACES[G.race].col,fx:'psistorm',rot:rand(0,TAU)});
   } else if(k==='minion'){
-    const zergling=id==='zergling';
-    const dmg=weaponDamage(w,B.dmg,zergling?0.08:0.12),count=B.count+Math.floor(countLv*(id==='queen'?0.5:(zergling?0.55:1.0))),dur=B.dur*(1+special*(zergling?0.045:0.10)),speed=B.speed*(1+special*(zergling?0.015:0.03));
-    const active=G.minions.filter(m=>m.source===id).length,limit=zergling?Math.min(34,14+countLv*2):999,spawnCount=Math.max(0,Math.min(count,limit-active));
-    for(let i=0;i<spawnCount;i++){const a=rand(0,TAU);G.minions.push({x:p.x+Math.cos(a)*20,y:p.y+Math.sin(a)*20,dmg,life:dur,spd:speed,hitcd:0,hitRate:zergling?0.42:0.3,tgt:null,big:id==='queen',aimHigh:B.aim==='high',source:id});}
+    const zergling=id==='zergling',queen=id==='queen';
+    const dmg=weaponDamage(w,B.dmg,zergling?0.08:(queen?0.09:0.12)),count=B.count+Math.floor(countLv*(queen?0.35:(zergling?0.55:1.0))),dur=B.dur*(1+special*(zergling?0.045:(queen?0.06:0.10))),speed=B.speed*(1+special*(zergling||queen?0.015:0.03));
+    const active=G.minions.filter(m=>m.source===id).length,limit=zergling?Math.min(34,14+countLv*2):(queen?Math.min(22,6+countLv):999),spawnCount=Math.max(0,Math.min(count,limit-active));
+    for(let i=0;i<spawnCount;i++){const a=rand(0,TAU);G.minions.push({x:p.x+Math.cos(a)*20,y:p.y+Math.sin(a)*20,dmg,life:dur,spd:speed,hitcd:0,hitRate:zergling?0.42:(queen?0.36:0.3),tgt:null,big:id==='queen',aimHigh:B.aim==='high',source:id,leash:B.range||760});}
   } else if(k==='mine'){
     const dmg=weaponDamage(w,B.dmg,0.17),radius=B.radius*area,count=1+Math.floor(countLv/3),limit=8+Math.floor(countLv/2);
     for(let i=0;i<count&&G.mines.length<limit;i++)G.mines.push({x:p.x+rand(-18,18),y:p.y+rand(-18,18),r:radius,dmg,arm:B.arm,trig:B.trig*area,spd:B.spd||300,t:0,blink:0,tgt:null});
@@ -897,7 +904,7 @@ function update(dt){
   for(const pu of G.pulses)pu.t+=dt;G.pulses=G.pulses.filter(p=>p.t<p.dur);
 
   // minions
-  for(const m of G.minions){m.life-=dt;if(m.hitcd>0)m.hitcd-=dt;if(!m.tgt||m.tgt.dead)m.tgt=m.aimHigh?highestTarget():nearestTarget(m.x,m.y);
+  for(const m of G.minions){m.life-=dt;if(m.hitcd>0)m.hitcd-=dt;if(m.tgt&&m.leash&&!inTargetRange(m.tgt,m.leash,G.player.x,G.player.y))m.tgt=null;if(!m.tgt||m.tgt.dead)m.tgt=m.aimHigh?highestTarget(m.leash,G.player.x,G.player.y):nearestTarget(m.x,m.y,null,m.leash,G.player.x,G.player.y);
     if(m.tgt){const dx=m.tgt.x-m.x,dy=m.tgt.y-m.y,d=Math.hypot(dx,dy)||1;m.x+=dx/d*m.spd*dt;m.y+=dy/d*m.spd*dt;if(d<m.tgt.r+8&&m.hitcd<=0){hurt(m.tgt,m.dmg,m.x,m.y,60);m.hitcd=m.hitRate||0.3;}}}
   G.minions=G.minions.filter(m=>m.life>0);
 

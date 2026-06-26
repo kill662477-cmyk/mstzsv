@@ -1,6 +1,6 @@
 # CALMSV Current Work Status
 
-Last updated: 2026-06-26 12:13 KST
+Last updated: 2026-06-26 12:27 KST
 
 ## Context
 
@@ -217,4 +217,54 @@ Verification:
 
 - VM smoke test confirmed base zergling summon still creates 3 minions.
 - VM smoke test confirmed heavily upgraded repeated zergling casts cap at 34 active minions.
-- VM smoke test confirmed queen minions still use the existing 0.30s hit interval and uncapped summon behavior.
+- Queen minions were audited separately in the follow-up section below.
+
+## Queen Broodling Balance Nerf
+
+Last updated: 2026-06-26 12:19 KST
+
+Issue:
+
+- `JJI`'s `브루들링` had the same multiplicative minion scaling risk as zerglings, but in a stronger single-target form.
+- VM audit showed a typical heavy upgrade setup could stack 72 broodlings, while an extreme setup could exceed 200.
+
+Fix:
+
+- Applied a queen-only minion nerf, separate from zergling tuning.
+- Reduced queen damage upgrade scaling from `0.12` to `0.09`.
+- Reduced queen count upgrade scaling from `+0.50` per count mod to `+0.35` per count mod.
+- Reduced queen duration upgrade scaling from `+10%` to `+6%` per special mod.
+- Reduced queen speed upgrade scaling from `+3%` to `+1.5%` per special mod.
+- Increased queen broodling hit interval from `0.30s` to `0.36s`.
+- Added a queen-only active minion cap: `min(22, 6 + countLv)`.
+
+Verification:
+
+- VM smoke test confirmed base queen summon still creates 1 broodling.
+- VM smoke test confirmed heavy upgrade repeated queen casts now cap at 16 active broodlings.
+- VM smoke test confirmed extreme queen stacking caps at 22 active broodlings.
+
+## Full Weapon Range Audit
+
+Last updated: 2026-06-26 12:27 KST
+
+Issue:
+
+- `JDD`/`시즈 포격` could hit temples from the center spawn because its target range used half of the map range.
+- A full audit found the same risk class in direct-placement fields and long-lived target-seeking projectiles/minions.
+
+Fix:
+
+- Added explicit target ranges to ranged target-seeking weapons:
+  - `marine`, `dragoon`, `reaver`, `ghost`, `medic`, `siege`, `storm`, `defiler`, `muta`, `hydra`, `zergling`, `queen`, `infestor`.
+- Changed target selection helpers to honor weapon range.
+- Changed projectile life for shot/spread/chain/scarab/snipe/medic projectiles to `range / speed`, so fallback shots cannot exceed their intended range.
+- Changed field placement weapons to only place fields on targets inside their range.
+- Changed minion targeting to leash targets to the player-centered weapon range.
+- Set `시즈 포격` range to `780`, preventing center-spawn temple sniping while preserving nearby artillery use.
+
+Verification:
+
+- VM audit fired every weapon at a synthetic temple 1250px away from player center for 12 seconds with heavy upgrades; result: no weapon damaged the far temple.
+- VM audit confirmed a 700px target remains hittable by representative range-limited weapons including siege, fields, minions, snipe, reaver, and hydra.
+- VM audit confirmed actual Stage 1 center-spawn temple distances are beyond the new siege range.
