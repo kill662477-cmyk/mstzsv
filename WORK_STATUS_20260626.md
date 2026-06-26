@@ -1,6 +1,6 @@
 # CALMSV Current Work Status
 
-Last updated: 2026-06-26 11:04 KST
+Last updated: 2026-06-26 11:10 KST
 
 ## Context
 
@@ -172,3 +172,25 @@ Verification:
 - `index.html` parses successfully with Node `vm.Script`.
 - Supabase asset dry-run reports `0` pending uploads.
 - VM smoke test confirmed: Stage 3 boss phase mineral pickup changes both `G.xp` and `#xpfill` width.
+
+## Ranged Enemy Pressure Patch
+
+Last updated: 2026-06-26 11:10 KST
+
+Issue:
+
+- Melee AOE characters could intentionally stay in Stage 1 through Frenzy, overgrow with levels, and then burst Stages 1-4 bosses too easily.
+
+Fix:
+
+- Reused existing ranged-concept enemies instead of adding new monsters.
+- Stages 1-3: `spit` enemies now fire ranged projectiles.
+- Stage 4: both `spit` and `drone` enemies fire ranged projectiles.
+- Enemy projectiles are cleared on portal/stage/endless transitions.
+- Ranged enemies slow their advance slightly inside preferred shooting range, creating real pressure against stationary farming.
+
+Verification:
+
+- VM smoke test confirmed Stage 1 and Stage 3 spawn only `spit` as the ranged regular enemy.
+- VM smoke test confirmed Stage 4 spawns both `spit` and `drone` ranged regular enemies.
+- VM smoke test confirmed `spit` projectiles are created and damage the player shield/HP pipeline.
