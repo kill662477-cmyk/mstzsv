@@ -203,12 +203,15 @@
   <button class="btn red" id="quitBtn">선수 변경</button>
 </div>
 
+<script src="r2-config.js"></script>
 <script>
 "use strict";
+const R2_PUBLIC_BASE_URL=String(window.CALMSV_R2_PUBLIC_BASE_URL||'').replace(/\/+$/,'');
 const NEXT_PUBLIC_SUPABASE_URL="https://rljvzultuyiudhjjfotg.supabase.co";
 const SUPABASE_ASSET_BUCKET="calmsv-assets";
 const SUPABASE_ASSET_PREFIX="assets";
-let ASSET_MODE=NEXT_PUBLIC_SUPABASE_URL?'remote':'local';
+let ASSET_MODE=(R2_PUBLIC_BASE_URL||NEXT_PUBLIC_SUPABASE_URL)?'remote':'local';
+let ASSET_PROVIDER=R2_PUBLIC_BASE_URL?'R2 CDN':'Supabase CDN';
 let ASSET_BASE='monstarz-survivors-assets/';
 let assetManifest=null;
 function assetUrl(fileName) {
@@ -999,14 +1002,17 @@ async function _loadDefaultSprites(){
 
   if (ASSET_MODE === 'remote') {
     const manifestUrls = [
+      R2_PUBLIC_BASE_URL ? `${R2_PUBLIC_BASE_URL}/calmsv-assets/${SUPABASE_ASSET_PREFIX}/asset-manifest.json` : '',
       `${NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${SUPABASE_ASSET_BUCKET}/${SUPABASE_ASSET_PREFIX}/asset-manifest.json`,
       'asset-manifest.json'
-    ];
+    ].filter(Boolean);
     for (const url of manifestUrls) {
       try {
         const res = await fetch(url, {cache:'no-store'});
         if (res.ok) {
           assetManifest = await res.json();
+          ASSET_PROVIDER = url.startsWith(R2_PUBLIC_BASE_URL) && R2_PUBLIC_BASE_URL ? 'R2 CDN' :
+            (url === 'asset-manifest.json' ? 'Local Manifest' : 'Supabase CDN');
           break;
         }
       } catch(e) {}
@@ -1053,7 +1059,7 @@ function _loadSprites(fileList){
 function _loadStatus(){
   const el=document.getElementById('loadStatus');
   if(!el)return;
-  const modeText = ASSET_MODE==='remote' ? 'Supabase CDN' : 'Local Fallback';
+  const modeText = ASSET_MODE==='remote' ? ASSET_PROVIDER : 'Local Fallback';
   el.textContent=`Asset pack [${modeText}] ${SPR_LOADED}/${SPR_TRIED} loaded`;
   el.style.color=SPR_TRIED&&SPR_LOADED>=SPR_TRIED?'#b6ff2e':'#22e0ff';
 }
