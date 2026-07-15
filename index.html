@@ -207,11 +207,9 @@
 <script>
 "use strict";
 const R2_PUBLIC_BASE_URL=String(window.CALMSV_R2_PUBLIC_BASE_URL||'').replace(/\/+$/,'');
-const NEXT_PUBLIC_SUPABASE_URL="https://rljvzultuyiudhjjfotg.supabase.co";
-const SUPABASE_ASSET_BUCKET="calmsv-assets";
-const SUPABASE_ASSET_PREFIX="assets";
-let ASSET_MODE=(R2_PUBLIC_BASE_URL||NEXT_PUBLIC_SUPABASE_URL)?'remote':'local';
-let ASSET_PROVIDER=R2_PUBLIC_BASE_URL?'R2 CDN':'Supabase CDN';
+const R2_ASSET_PREFIX="assets";
+let ASSET_MODE=R2_PUBLIC_BASE_URL?'remote':'local';
+let ASSET_PROVIDER=R2_PUBLIC_BASE_URL?'R2 CDN':'Local Fallback';
 let ASSET_BASE='monstarz-survivors-assets/';
 let assetManifest=null;
 function assetUrl(fileName) {
@@ -1001,23 +999,17 @@ async function _loadDefaultSprites(){
   _loadStatus();
 
   if (ASSET_MODE === 'remote') {
-    const manifestUrls = [
-      R2_PUBLIC_BASE_URL ? `${R2_PUBLIC_BASE_URL}/calmsv-assets/${SUPABASE_ASSET_PREFIX}/asset-manifest.json` : '',
-      `${NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${SUPABASE_ASSET_BUCKET}/${SUPABASE_ASSET_PREFIX}/asset-manifest.json`,
-      'asset-manifest.json'
-    ].filter(Boolean);
-    for (const url of manifestUrls) {
-      try {
-        const res = await fetch(url, {cache:'no-store'});
-        if (res.ok) {
-          assetManifest = await res.json();
-          ASSET_PROVIDER = url.startsWith(R2_PUBLIC_BASE_URL) && R2_PUBLIC_BASE_URL ? 'R2 CDN' :
-            (url === 'asset-manifest.json' ? 'Local Manifest' : 'Supabase CDN');
-          break;
-        }
-      } catch(e) {}
+    const manifestUrl=`${R2_PUBLIC_BASE_URL}/calmsv-assets/${R2_ASSET_PREFIX}/asset-manifest.json`;
+    try {
+      const res=await fetch(manifestUrl,{cache:'no-store'});
+      if(!res.ok) throw new Error(`R2 manifest ${res.status}`);
+      assetManifest=await res.json();
+      ASSET_PROVIDER='R2 CDN';
+    } catch(e) {
+      assetManifest=null;
+      ASSET_MODE='local';
+      ASSET_PROVIDER='Local Fallback';
     }
-    if (!assetManifest) ASSET_MODE = 'local';
   }
 
   const patchIcon = (html, fName) => html.replace(/src='[^']*'/, `src='${assetUrl(fName)}'`);
